@@ -1,0 +1,18 @@
+[
+    {
+        "productName": "Toy",
+        "price": 19.90,
+        "description": "new toy",
+        "categoryId": "01",
+        "category": "Toy",
+        "skuSeq": 1
+    },
+    {
+        "productName": "Toy2",
+        "price": 19.99,
+        "description": "new toy2",
+        "categoryId": "01",
+        "category": "Toy",
+        "skuSeq": 2
+    }
+]

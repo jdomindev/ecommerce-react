@@ -2,29 +2,29 @@ const { Schema, model } = require("mongoose");
 
 const paymentSchema = new Schema({
   userId: {
-    Type: String
+    type: String
   },
   type: {
-    Type: String
+    type: String
   },
   status: {
-    Type: String
+    type: String
   },
   card: {
       provider: {
-        Type: String
+        type: String
       },
       lastFourNum: {
-        Type: Number
+        type: Number
       },
       expiryMonth: {
-        Type: Number
+        type: Number
       },
       expiryYear: {
-        Type: Number
+        type: Number
       },
       cvvVerified: {
-        Type: Boolean
+        type: Boolean
       }
   }
 });
