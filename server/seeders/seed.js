@@ -1,13 +1,17 @@
 const db = require('../config/connection');
-const { User, Product } = require('../models');
+const { User, Product, Category } = require('../models');
 const {getSku} = require('../utils/skuGenerator');
-// const fandomSeeds = require('./fandomSeeds.json')
+const categorySeeds = require('./categorySeeds.json')
 
 db.once('open', async () => {
   try {
     // await User.deleteMany({});
+    // await Category.deleteMany({});
     await Product.deleteMany({});
+    
+    // await Category.create(categorySeeds)
     await Product.create(getSku())
+    
     // await Fandom.create(fandomSeeds);
 
 

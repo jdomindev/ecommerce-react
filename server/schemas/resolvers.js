@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Payment, Order } = require('../models');
+const { User, Address, Product, Payment, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -53,13 +53,35 @@ const resolvers = {
       return { token, user };
     },
 
+    createAddress: async (parent, {streetName, aptNo, zipCode, city, state, country}, context) => {
+        const address = await Address.create({streetName, aptNo, zipCode, city, state, country})
+      return address; 
+    },
+
+    // addAddress
+    // adds billing and shipping address to order
+    // addAddress: async (parent, args, context) => {
+    //   // if (context.user) {
+    //     const updatedCart = await Order.findOneAndUpdate(
+    //           { _id: args.orderId },
+    //           { $push: { products: args._id } },
+    //           { new: true, runValidators: true }
+    //       ).populate('user').populate('products')
+    //   return updatedCart; 
+    //   // }
+    //   // throw new AuthenticationError('You need to be logged in!');
+    //   // { _id: context.user._id },
+    //   // { $push: { fandoms: args.fandomId } },
+    //   // { $set: { fandoms: args.fandomsArray } },
+    // },
+
     addProduct: async (parent, args, context) => {
       // if (context.user) {
-        const updatedCart = await User.findOneAndUpdate(
-              { _id: args.userId },
+        const updatedCart = await Order.findOneAndUpdate(
+              { _id: args.orderId },
               { $push: { products: args._id } },
               { new: true, runValidators: true }
-          ).populate('products')
+          ).populate('user').populate('products')
       return updatedCart; 
       // }
       // throw new AuthenticationError('You need to be logged in!');
@@ -67,6 +89,19 @@ const resolvers = {
       // { $push: { fandoms: args.fandomId } },
       // { $set: { fandoms: args.fandomsArray } },
     },
+    // addOrder: async (parent, { products }, context) => {
+    //   console.log(context);
+    //   if (context.user) {
+    //     const order = new Order({ products });
+
+    //     await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+
+    //     return order;
+    //   }
+
+    //   throw new AuthenticationError('Not logged in');
+    // },
+    
 
     
 

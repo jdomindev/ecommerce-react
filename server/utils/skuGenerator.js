@@ -8,7 +8,7 @@ const productSeeds = require('../seeders/productSeeds');
 
 module.exports = {
     getSku: function() {
-            const productFinal = productSeeds.map(product => ({ ...product, sku: (product.productName.substring(0,2) + product.categoryId + product.skuSeq)
+            const productFinal = productSeeds.map(product => ({ ...product, sku: (product.deptCode.substring(0,2) + product.type.substring(0,3) + product.skuSeq)
             }))
             return productFinal
         }

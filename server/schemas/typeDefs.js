@@ -7,26 +7,43 @@ const typeDefs = gql`
     password: String!
     firstName: String!
     lastName: String!
-    products: [Product]
     orders: [Order]
   }
 
-  type Product {
+  type Address {
     _id: ID!
-    productName: String!
-    price: Float!
-    description: String!
-    category: String
-    categoryId: String
-    skuSeq: Float
-    sku: String
+    streetName: String
+    aptNo: String
+    zipCode: Int
+    city: String
+    state: String
+    country: String
   }
 
   type Order {
     _id: ID!
-    userId: String!
+    user: User
+    products: [Product]
     amount: Int!
     trackingNumber: String
+  }
+
+  type Product {
+    _id: ID
+    name: String
+    price: Float
+    description: String
+    category: Category
+    deptCode: String
+    type: String
+    quantity: Int
+    skuSeq: String
+    sku: String
+  }
+
+  type Category {
+    _id: ID!
+    name: String
   }
 
   type Payment {
@@ -34,6 +51,7 @@ const typeDefs = gql`
     userId: ID!
     type: String
     status: String
+    session: ID
   }
 
   type Auth {
@@ -52,9 +70,8 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(email: String!, password: String!, firstName: String!, lastName: String!): Auth
 
-    addProduct(userId: ID!, _id: ID!): User
-    
-
+    createAddress(streetName: String!, aptNo: String, zipCode: Int!, city: String!, state: String!, country: String!): Address
+    addProduct(orderId: ID!, _id: ID!): Order
 
   }
 `;

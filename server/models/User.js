@@ -21,56 +21,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  billingAddress: {
-    streetName: {
-      type: String,
-    },
-    aptNo: {
-      type: String,
-    },
-    zipCode: {
-      type: Number,
-    },
-    city: {
-      type: String,
-    },
-    state: {
-      type: String,
-    },
-    country: {
-      type: String,
-    },
-  },
-  shippingAddress: {
-    streetName: {
-      type: String,
-    },
-    aptNo: {
-      type: String,
-    },
-    zipCode: {
-      type: Number,
-    },
-    city: {
-      type: String,
-    },
-    state: {
-      type: String,
-    },
-    country: {
-      type: String,
-    },
-  },
   orders: [
     {
       type: Schema.Types.ObjectId,
       ref: "Order",
-    }
-  ],
-  products: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Product",
     }
   ]
 });
