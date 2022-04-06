@@ -23,8 +23,10 @@ const typeDefs = gql`
   type Order {
     _id: ID!
     user: User
+    shippingAddress: Address
+    billingAddress: Address
     products: [Product]
-    amount: Int!
+    amount: Int
     trackingNumber: String
   }
 
@@ -63,16 +65,22 @@ const typeDefs = gql`
     me(_id: ID!): User!
     products: [Product]
     orders: [Order]
-    
+    addresses: [Address]
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(email: String!, password: String!, firstName: String!, lastName: String!): Auth
 
+    createOrder(userId: ID!): Order
+    addOrder(userId: ID!, orderId: ID!): User
+
     createAddress(streetName: String!, aptNo: String, zipCode: Int!, city: String!, state: String!, country: String!): Address
+    addAddress(orderId: ID!, shippingAddress: [String], billingAddress: [String]): Order
+    
     addProduct(orderId: ID!, _id: ID!): Order
 
+    
   }
 `;
 

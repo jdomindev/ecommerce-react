@@ -22,7 +22,11 @@ const resolvers = {
     },
 
     orders: async () => {
-      return Order.find();
+      return Order.find()
+    },
+
+    addresses: async () => {
+      return Address.find()
     },
 
 
@@ -53,6 +57,34 @@ const resolvers = {
       return { token, user };
     },
 
+    createOrder: async (parent, {userId}, context) => {
+       // if (context.user) {
+      const order = await Order.create({ user: userId})
+      return order; 
+    // }
+      // throw new AuthenticationError('You need to be logged in!');
+      // { _id: context.user._id },
+      // { $push: { fandoms: args.fandomId } },
+      // { $set: { fandoms: args.fandomsArray } },
+    },
+
+    addOrder: async (parent, {userId, orderId}, context) => {
+      // if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+              { _id: userId },
+              { $set: { orders: orderId } },
+              { new: true, runValidators: true }
+          ).populate('orders').populate('products')
+      return updatedUser; 
+      // }
+      // throw new AuthenticationError('You need to be logged in!');
+      // { _id: context.user._id },
+      // { $push: { fandoms: args.fandomId } },
+      // { $set: { fandoms: args.fandomsArray } },
+    },
+
+
+
     createAddress: async (parent, {streetName, aptNo, zipCode, city, state, country}, context) => {
         const address = await Address.create({streetName, aptNo, zipCode, city, state, country})
       return address; 
@@ -60,20 +92,20 @@ const resolvers = {
 
     // addAddress
     // adds billing and shipping address to order
-    // addAddress: async (parent, args, context) => {
-    //   // if (context.user) {
-    //     const updatedCart = await Order.findOneAndUpdate(
-    //           { _id: args.orderId },
-    //           { $push: { products: args._id } },
-    //           { new: true, runValidators: true }
-    //       ).populate('user').populate('products')
-    //   return updatedCart; 
-    //   // }
-    //   // throw new AuthenticationError('You need to be logged in!');
-    //   // { _id: context.user._id },
-    //   // { $push: { fandoms: args.fandomId } },
-    //   // { $set: { fandoms: args.fandomsArray } },
-    // },
+    addAddress: async (parent, {orderId, shippingAddress, billingAddress}, context) => {
+      // if (context.user) {
+        const updatedCart = await Order.findOneAndUpdate(
+              { _id: orderId },
+              { $set: { shippingAddress, billingAddress } },
+              { new: true, runValidators: true }
+          )
+      return updatedCart; 
+      // }
+      // throw new AuthenticationError('You need to be logged in!');
+      // { _id: context.user._id },
+      // { $push: { fandoms: args.fandomId } },
+      // { $set: { fandoms: args.fandomsArray } },
+    },
 
     addProduct: async (parent, args, context) => {
       // if (context.user) {
@@ -116,3 +148,22 @@ const resolvers = {
 };
 
 module.exports = resolvers;
+
+
+// GOOD
+
+// queries
+// addUser
+// login
+// createOrder
+// addOrder
+// createAddress
+// addProduct
+
+
+// NEED
+
+// addAddress
+
+// need to fix mutation, choose whether its an address Id or the whole address
+// thinking I choose to have addresses in order as id only like the products and everything else
