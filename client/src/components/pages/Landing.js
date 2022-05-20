@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import "./../assets/Landing.css";
 import SmoothScroll from "smooth-scroll";
 import logo from "../images/keyboard.svg";
@@ -13,7 +15,6 @@ export default function Landing() {
     <>
       <header>
         <div>
-          <div className="row">
             <div className="col-md-12 header">
               <img
                 className="img-fluid"
@@ -25,15 +26,14 @@ export default function Landing() {
                 Tandem Fandom is THE people finding app for the Who's Whovian of
                 your favorite fandoms!
               </p>
-              <a href="/Signup" className="btn btn-custom btn-lg mr-2">
+              <Link to="/signup" className="btn btn-custom mr-2">
                 Sign Up
-              </a>
-              <a href="/Login" className="btn btn-custom btn-lg ml-2">
+              </Link>
+              <Link to="/login" className="btn btn-custom ml-2">
                 Login
-              </a>
+              </Link>
             </div>
           </div>
-        </div>
       </header>
     </>
   );

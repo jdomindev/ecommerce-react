@@ -1,22 +1,55 @@
+/* MAIN */
+
+:root {
+  --primary-color: rgb(74, 96, 148);
+  --secondary-color: #b3c9ff;
+  --tertiary-color: #87a2e0;
+  --4th-color: #baa066;
+  --5th-color: #e0c687;
+  --off-white-color: #e6f0ef;
+  --shadow-color: rgba(0, 5, 17, 0.5);
+}
+
+body,
+html {
+  font-family: "Open Sans", sans-serif;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  font-weight: 400;
+  font-family: 'Open Sans', sans-serif;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: var(--off-white-color);
+}
+
+body {
+  background-color: var(--secondary-color); 
+}
+
+
 /* Header Section */
+.header {
+  margin: 1rem 0rem 1rem 0rem;
+  text-align: center;
+}
+
 /* login + sign-up buttons */
-
-
 .btn-custom {
-  font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   color: #fff;
   background-color: #88afa6;
-  background-image: linear-gradient(to right,#88afa6 0%, #627e8d 100%);
-  padding: 14px 34px;
+  background-image: linear-gradient(to right, var(--4th-color) 0%, var(--5th-color) 100%);
+  padding: 1rem 1.5rem;
   letter-spacing: 1px;
-  margin: 0;
-  font-size: 15px;
+  margin-top: 16px;
+  font-size: 1rem;
   font-weight: 500;
-  border-radius: 25px;
-  border-color: #88afa6;
   transition: all 0.5s linear;
-  border: 0;
+  border-radius: 15px;
+  border: none;
 }
 
 .btn-custom:hover,
@@ -26,7 +59,7 @@
 .btn-custom.active {
   color: #fff;
   background-image: none;
-  background-color: #c3cca2;
+  background-color: var(--5th-color);
 }
 
 .btn:active,
@@ -48,8 +81,5 @@ a:focus,
   outline-offset: none;
 }
 
-.header {
-  margin: 1rem 0rem 1rem 0rem;
-  text-align: center;
-}
+
 

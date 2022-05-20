@@ -8,7 +8,7 @@ import auth from "../../utils/auth";
 
 function NavTabs() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light py-3 sticky-top">
+    <nav className="navbar navbar-expand-lg sticky-top">
       <a className="navbar-brand" href="/">
         <img src={logo} width="50" alt="Tandem Fandom" />
       </a>
@@ -51,14 +51,14 @@ function NavTabs() {
           {!auth.loggedIn() && (
             <>
               <li className="nav-item">
-                <Link className="navbar-brand nav-link" to="/Login">
+                <Link className="navbar-brand nav-link" to="/login">
                   Login
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className="navbar-brand nav-link" to="/Signup">
-                  Signup
+                <Link className="navbar-brand nav-link" to="/signup">
+                  Create Account
                 </Link>
               </li>
             </>

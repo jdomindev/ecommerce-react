@@ -1,0 +1,12 @@
+.form-container {
+  margin: 2rem 0rem 2rem 0rem;
+}
+
+.login-card {
+    width: 40%;
+    padding: 2rem;
+    border-radius: 25px;
+    background-color: var(--tertiary-color);
+    color: var(--off-white-color);
+    /* box-shadow: 3px 3px var(--shadow-color); */
+}

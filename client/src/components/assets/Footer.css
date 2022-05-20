@@ -16,16 +16,12 @@
 
 .footer {
   padding: 1rem;
-  background-color: #10283e;
+  /* background-color: #10283e; */
+  background-color: var(--primary-color);
 }
 
-.footer-color {
-  color: #c3cca2;
-}
-
-a:link, a:visited {
-  color: #c3cca2;
-  background-color: transparent;
+.icon:link, .icon:visited {
+  color: var(--4th-color);
   text-decoration: none;
 }
   
@@ -35,9 +31,8 @@ a:link, a:visited {
     text-decoration: none;
   } */
   
-  a:hover {
-    color: #d49421;
-    background-color: transparent;
+  .icon:hover {
+    color: var(--5th-color);
     text-decoration: none;
   }
   
@@ -53,6 +48,7 @@ a:link, a:visited {
 
   .icons {
     padding-top: 1rem;
+    color: var(--4th-color);
   }
 
  

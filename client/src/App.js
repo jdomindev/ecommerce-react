@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Landing from "./components/pages/Landing"
 import Login from "./components/pages/Login"
+import Signup from "./components/pages/SignUp"
 
 import NavTabs from "./components/layout/NavTabs"
 import Footer from "./components/layout/Footer"
@@ -51,6 +52,9 @@ function App() {
             </Route>
             <Route exact path="/login">
               <Login />
+            </Route>
+            <Route exact path="/signup">
+              <Signup />
             </Route>
           </div>
           <Footer />

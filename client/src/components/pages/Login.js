@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 import logo from '../images/keyboard.svg';
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Card } from 'react-bootstrap'
 import "../assets/Login.css"
 
 import Auth from '../../utils/auth';
@@ -43,45 +43,52 @@ const Login = () => {
 
   return (
     <>
-      <div className="text-center">
-        <img src={logo} width="300" alt="Tandem Fandom" />
-      </div>
+        <div className="col-md-12 header">
+            <img src={logo} width="25%" alt="React Ecommerce" />
+        </div>
     
-     <hr></hr>
-     <Form onSubmit={handleFormSubmit}>
-       <Form.Group >
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder='Your email address'
-            name='email'
-            onChange={handleChange}
-            value={formState.email}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
+        <div className='col-md-12'>
+            <div className='d-flex justify-content-center form-container'>
+                <Card className='login-card'>
+                    <Form onSubmit={handleFormSubmit} className="login-form">
+                    <Form.Group >
+                        <Form.Label htmlFor='email'>Email</Form.Label>
+                        <Form.Control
+                            type='email'
+                            placeholder='Your email address'
+                            name='email'
+                            onChange={handleChange}
+                            value={formState.email}
+                            required
+                        />
+                        <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+                        </Form.Group>
 
-        <Form.Group >
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleChange}
-            value={formState.password}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
-        
-        <Button
-          className='btn btn-custom btn-lg'
-          type='submit'
-          variant='success'>
-          Submit
-        </Button>
-      </Form>
+                        <Form.Group >
+                        <Form.Label htmlFor='password'>Password</Form.Label>
+                        <Form.Control
+                            type='password'
+                            placeholder='Your password'
+                            name='password'
+                            onChange={handleChange}
+                            value={formState.password}
+                            required
+                        />
+                        <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+                        </Form.Group>
+
+                        <div className='d-flex justify-content-center'>
+                            <Button
+                            className='btn-custom'
+                            type='submit'
+                            variant='success'>
+                            Submit
+                            </Button>
+                        </div>
+                    </Form>
+                </Card>
+            </div>
+        </div>
     </>
   );
 };
