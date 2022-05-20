@@ -153,17 +153,30 @@ module.exports = resolvers;
 // GOOD
 
 // queries
+
 // addUser
-// login
-// createOrder
-// addOrder
-// createAddress
-// addProduct
+// login 
+// createOrder (new Order)
+// addOrder (adds Order to User's orders)
+// createAddress (new Address)
+// addProduct (to Order)
+// addAddress (Addresses to Order)
 
 
 // NEED
 
-// addAddress
+// editUser (email, password, firstName, lastName)
+// editAddress (shipping and billing)
 
-// need to fix mutation, choose whether its an address Id or the whole address
-// thinking I choose to have addresses in order as id only like the products and everything else
+
+
+
+// User Process
+
+// signup
+// login
+// look at products OR look at profile 
+// add product to cart (addProduct)
+// save for later? wishlist vs cart?
+// checkout product ()
+// buy product

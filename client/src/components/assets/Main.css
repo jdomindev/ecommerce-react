@@ -1,0 +1,38 @@
+:root {
+    /* --primary-color: rgb(34, 106, 199); */
+    --primary-color: rgb(59, 119, 197, .8);
+    --secondary-color: rgb(246, 245, 245);
+    --secondary-color-opacity: rgba(15, 1, 1, 0.5);
+    --tertiary-color: rgb(56, 56, 56);
+    --background-color: #e6f0ef;
+    --shadow-color: rgba(0, 5, 17, 0.5);
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+
+body {
+    background-color: #e6f0ef !important;
+}
+
+body,
+html {
+  font-family: "Open Sans", sans-serif;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  font-weight: 400;
+  font-family: 'Open Sans', sans-serif;
+  scroll-behavior: smooth;
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+
+
+  
+}

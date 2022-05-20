@@ -1,0 +1,58 @@
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 110px;    /* Footer height */
+}
+
+#contact {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 110px;            /* Footer height */
+}
+
+.footer {
+  padding: 1rem;
+  background-color: #10283e;
+}
+
+.footer-color {
+  color: #c3cca2;
+}
+
+a:link, a:visited {
+  color: #c3cca2;
+  background-color: transparent;
+  text-decoration: none;
+}
+  
+  /* a:visited {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+  } */
+  
+  a:hover {
+    color: #d49421;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  /* a:active {
+    color: #88afa6;
+    background-color: transparent;
+    text-decoration: underline;
+  } */
+
+  .fa-brands{
+    padding-left: 1.5rem;
+  }
+
+  .icons {
+    padding-top: 1rem;
+  }
+
+ 
