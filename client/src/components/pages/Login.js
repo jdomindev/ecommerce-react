@@ -9,7 +9,7 @@ import Auth from '../../utils/auth';
 
 const Login = () => {
   const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [login] = useMutation(LOGIN_USER);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -19,6 +19,8 @@ const Login = () => {
       ...formState,
       [name]: value,
     });
+
+    
   };
 
   // submit form
@@ -43,9 +45,11 @@ const Login = () => {
 
   return (
     <>
-        <div className="col-md-12 header">
-            <img src={logo} width="25%" alt="React Ecommerce" />
+      <div className="col-md-12 header">
+        <div className='d-flex justify-content-center'>
+          <img src={logo} width="25%" alt="Ecommerce React" />
         </div>
+      </div>
     
         <div className='col-md-12'>
             <div className='d-flex justify-content-center form-container'>

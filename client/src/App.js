@@ -1,14 +1,4 @@
 import React from "react";
-import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
-import Landing from "./components/pages/Landing"
-import Login from "./components/pages/Login"
-import Signup from "./components/pages/SignUp"
-
-import NavTabs from "./components/layout/NavTabs"
-import Footer from "./components/layout/Footer"
-
 import {
   ApolloClient,
   InMemoryCache,
@@ -16,9 +6,20 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
+import "./App.css";
+import Landing from "./components/pages/Landing"
+import Login from "./components/pages/Login"
+import Signup from "./components/pages/SignUp"
+
+import NavTabs from "./components/layout/NavTabs"
+import Footer from "./components/layout/Footer"
+
+// CHANGE BACK AFTER DEPLOYMENT?
 const httpLink = createHttpLink({
-  uri: "/graphql",
+  // uri: "/graphql",
+  uri: "http://localhost:3001/graphql"
 });
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header

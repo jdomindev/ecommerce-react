@@ -8,6 +8,7 @@
   --5th-color: #e0c687;
   --off-white-color: #e6f0ef;
   --shadow-color: rgba(0, 5, 17, 0.5);
+  --background-color: rgb(120, 120, 120);
 }
 
 body,
@@ -40,7 +41,7 @@ body {
 .btn-custom {
   text-transform: uppercase;
   color: #fff;
-  background-color: #88afa6;
+  background-color: var(--4th-color);
   background-image: linear-gradient(to right, var(--4th-color) 0%, var(--5th-color) 100%);
   padding: 1rem 1.5rem;
   letter-spacing: 1px;
@@ -50,6 +51,8 @@ body {
   transition: all 0.5s linear;
   border-radius: 15px;
   border: none;
+  box-shadow: 1px 1px var(--shadow-color);
+
 }
 
 .btn-custom:hover,
@@ -81,5 +84,8 @@ a:focus,
   outline-offset: none;
 }
 
+.btn-success:disabled {
+  background-color: var(--4th-color);
+}
 
 

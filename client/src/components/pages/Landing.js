@@ -14,26 +14,25 @@ export default function Landing() {
   return (
     <>
       <header>
-        <div>
-            <div className="col-md-12 header">
-              <img
-                className="img-fluid"
-                src={logo}
-                width="25%"
-                alt="React Ecommerce"
-              />
-              <p className="text-secondary">
-                Tandem Fandom is THE people finding app for the Who's Whovian of
-                your favorite fandoms!
-              </p>
+        <div className="col-md-12 header">
+          <div className="d-flex justify-content-center">
+            <img src={logo} width="25%" alt="Ecommerce React" />
+          </div>
+        </div>
+        <div className="col-md-12 header">
+            <p className="text-secondary text-center">
+              React E-commerce site template to be used for various product
+              models.
+            </p>
+            <div className="d-flex justify-content-center">
               <Link to="/signup" className="btn btn-custom mr-2">
                 Sign Up
               </Link>
               <Link to="/login" className="btn btn-custom ml-2">
                 Login
               </Link>
-            </div>
           </div>
+        </div>
       </header>
     </>
   );
