@@ -11,6 +11,10 @@
     /* box-shadow: 1px 1px var(--shadow-color); */
 }
 
+.forgot-password {
+  color: var(--5th-color)
+}
+
 
 @media only screen and (min-width: 1100px) {
 

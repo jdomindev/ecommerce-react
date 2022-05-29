@@ -12,6 +12,7 @@ import "./App.css";
 import Landing from "./components/pages/Landing"
 import Login from "./components/pages/Login"
 import Signup from "./components/pages/SignUp"
+import Home from "./components/pages/Home"
 
 import NavTabs from "./components/layout/NavTabs"
 import Footer from "./components/layout/Footer"
@@ -50,6 +51,9 @@ function App() {
             <NavTabs />
             <Route exact path="/">
               <Landing />
+            </Route>
+            <Route exact path="/home">
+              <Home />
             </Route>
             <Route exact path="/login">
               <Login />

@@ -9,9 +9,9 @@ import auth from "../../utils/auth";
 function NavTabs() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark sticky-top">
-      <a className="navbar-brand" href="/">
+      <Link className="navbar-brand" to="/home">
         <img src={logo} width="50" alt="Tandem Fandom" />
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -25,31 +25,35 @@ function NavTabs() {
       </button>
 
       <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav mr-auto">
           {auth.loggedIn() && (
             <>
+            <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link className="navbar-brand nav-link" to="/Profile">
-                  Profile
+                <Link className="navbar-brand nav-link" to="/profile">
+                  Profile <i className="fa-solid fa-user"></i>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="navbar-brand nav-link" to="/Connections">
-                  Connections
+                <Link className="navbar-brand nav-link" to="/wishlist">
+                  Wishlist <i className="fa-solid fa-rectangle-list"></i>
                 </Link>
               </li>
+            </ul>
+            <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link className="navbar-brand nav-link" to="/Matches">
-                  Find Matches
+                <Link className="navbar-brand nav-link" to="/cart">
+                  Cart <i className="fa-solid fa-cart-shopping"></i>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="navbar-brand nav-link" to="/" onClick={auth.logout}>Logout</Link>
               </li>
+            </ul>
             </>
           )}
           {!auth.loggedIn() && (
             <>
+            <ul className="navbar-nav mr-auto">
               <li className="nav-item">
                 <Link className="navbar-brand nav-link" to="/login">
                   Login
@@ -61,9 +65,9 @@ function NavTabs() {
                   Create Account
                 </Link>
               </li>
+            </ul>
             </>
           )}
-        </ul>
       </div>
     </nav>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 import logo from '../images/keyboard.svg';
@@ -34,6 +35,7 @@ const Login = () => {
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
+      alert(e)
     }
 
     // clear form values
@@ -89,6 +91,9 @@ const Login = () => {
                             Submit
                             </Button>
                         </div>
+                        <p className="text-right">
+                          Forgot <Link className="forgot-password" to="/">password?</Link>
+                        </p>
                     </Form>
                 </Card>
             </div>
