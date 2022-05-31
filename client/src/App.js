@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
   ApolloClient,
   InMemoryCache,
@@ -44,8 +44,10 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartItems') || '[]')
+  const [cartItems, setCartItems] = useState(cartFromLocalStorage)
 
-  const [cartItems, setCartItems] = useState([])
+  
     
   const onAddToCart = (product) => { 
       const exist = cartItems.find(x => x._id === product._id)
@@ -66,6 +68,10 @@ function App() {
         )
     }
   }
+
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems))
+  }, [cartItems]);
 
 
   return (
