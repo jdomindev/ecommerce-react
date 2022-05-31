@@ -1,4 +1,4 @@
-const productSeeds = require('../seeders/productSeeds');
+const productSeeds = require('../seeders/productSeedsJson');
 
 // 1.) Start sku numbers with a top-level identifier (dept no, store no.)
 // 2.) Use the middle numbers to assign unique identifiers (size, color, item type, subcategory)

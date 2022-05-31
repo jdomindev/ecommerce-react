@@ -91,7 +91,7 @@ const Login = () => {
                             Submit
                             </Button>
                         </div>
-                        <p className="text-right">
+                        <p className="text-right m-0">
                           Forgot <Link className="forgot-password" to="/">password?</Link>
                         </p>
                     </Form>

@@ -7,13 +7,13 @@ import caro3 from "../images/caro3.jpg"
 export default function Carousel() {
   return (
     <>  
-            <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel" data-pause="hover">
+            <div id="carouselExampleIndicators" className="carousel slide " data-ride="carousel" data-pause="hover">
                 <ol className="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
-                <div className="carousel-inner carousel-slider">
+                <div className="carousel-inner">
                     <div className="carousel-item active">
                         <img className="d-block w-100" src={caro1} alt="First slide"/>
                         <div className="carousel-caption d-md-block">

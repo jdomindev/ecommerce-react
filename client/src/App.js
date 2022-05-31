@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   ApolloClient,
   InMemoryCache,
@@ -13,6 +13,7 @@ import Landing from "./components/pages/Landing"
 import Login from "./components/pages/Login"
 import Signup from "./components/pages/SignUp"
 import Home from "./components/pages/Home"
+import Cart from "./components/pages/Cart"
 
 import NavTabs from "./components/layout/NavTabs"
 import Footer from "./components/layout/Footer"
@@ -43,23 +44,50 @@ const client = new ApolloClient({
 });
 
 function App() {
+
+  const [cartItems, setCartItems] = useState([])
+    
+  const onAddToCart = (product) => { 
+      const exist = cartItems.find(x => x._id === product._id)
+      if (exist) {
+          setCartItems(cartItems.map(x => x._id === product._id ? {...exist, quantity: exist.quantity + 1} : x)) 
+      } else {
+          setCartItems([...cartItems, {...product, quantity: 1}])
+      }
+  }
+
+  const onRemoveFromCart = (product) => {
+    const exist = cartItems.find(x => x._id === product._id)
+    if (exist.quantity === 1) {
+        setCartItems(cartItems.filter(x => x._id !== product._id))
+    } else {
+        setCartItems(
+            cartItems.map(x => x._id === product._id ? {...exist, quantity: exist.quantity - 1} : x)
+        )
+    }
+  }
+
+
   return (
     <ApolloProvider client={client}>
       <Router>
         <div id="page-container">
           <div id="content-wrap">
-            <NavTabs />
+            <NavTabs countCartItems={cartItems.length }/>
             <Route exact path="/">
               <Landing />
             </Route>
             <Route exact path="/home">
-              <Home />
+              <Home onAddToCart={onAddToCart}/>
             </Route>
             <Route exact path="/login">
               <Login />
             </Route>
             <Route exact path="/signup">
               <Signup />
+            </Route>
+            <Route exact path="/cart">
+            <Cart cartItems={cartItems} onAddToCart={onAddToCart} onRemoveFromCart={onRemoveFromCart}/>
             </Route>
           </div>
           <Footer />

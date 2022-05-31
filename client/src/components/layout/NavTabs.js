@@ -6,7 +6,10 @@ import logo from "../images/keyboard.svg";
 
 import auth from "../../utils/auth";
 
-function NavTabs() {
+function NavTabs(props) {
+  const {countCartItems} = props
+
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark sticky-top">
       <Link className="navbar-brand" to="/home">
@@ -42,11 +45,18 @@ function NavTabs() {
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link className="navbar-brand nav-link" to="/cart">
-                  Cart <i className="fa-solid fa-cart-shopping"></i>
-                </Link>
+                  
+                  Cart <i className="fa-solid fa-cart-shopping"></i> {' '}
+                  {countCartItems ? (
+                    <button className="badge">{countCartItems}</button>
+                  ) : (
+                    ''
+                  )}
+
+                </Link>{' '}
               </li>
               <li className="nav-item">
-                <Link className="navbar-brand nav-link" to="/" onClick={auth.logout}>Logout</Link>
+                <button id="no-button-style" className="navbar-brand nav-link" onClick={auth.logout}>Logout</button>
               </li>
             </ul>
             </>
