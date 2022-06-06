@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert, Card } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-import logo from '../images/keyboard.svg';
+import logo from '../images/leaf.svg';
 import "./../assets/SignUp.css"
 
 import Auth from '../../utils/auth';

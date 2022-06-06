@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
-import logo from '../images/keyboard.svg';
+import logo from '../images/leaf.svg';
 import { Form, Button, Card } from 'react-bootstrap'
 import "../assets/Login.css"
 

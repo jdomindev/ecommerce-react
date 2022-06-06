@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 import "../assets/NavTabs.css";
-import logo from "../images/keyboard.svg";
+import logo from "../images/leaf.svg";
 
 import auth from "../../utils/auth";
 
@@ -13,7 +13,7 @@ function NavTabs(props) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark sticky-top">
       <Link className="navbar-brand" to="/home">
-        <img src={logo} width="50" alt="Tandem Fandom" />
+        <img src={logo} width="50" alt="leaf logo" />
       </Link>
       <button
         className="navbar-toggler"

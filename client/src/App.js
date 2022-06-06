@@ -47,6 +47,11 @@ function App() {
   const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartItems') || '[]')
   const [cartItems, setCartItems] = useState(cartFromLocalStorage)
 
+  // const countCartItems = () => {
+  //   let totalQuantity = 0
+  //   cartItems.forEach(product => {totalQuantity + product.quantity})
+
+  // }
   
     
   const onAddToCart = (product) => { 
@@ -79,7 +84,7 @@ function App() {
       <Router>
         <div id="page-container">
           <div id="content-wrap">
-            <NavTabs countCartItems={cartItems.length }/>
+            <NavTabs countCartItems={cartItems.length}/>
             <Route exact path="/">
               <Landing />
             </Route>
@@ -93,7 +98,7 @@ function App() {
               <Signup />
             </Route>
             <Route exact path="/cart">
-            <Cart cartItems={cartItems} onAddToCart={onAddToCart} onRemoveFromCart={onRemoveFromCart}/>
+            <Cart countCartItems={cartItems.length} cartItems={cartItems} onAddToCart={onAddToCart} onRemoveFromCart={onRemoveFromCart}/>
             </Route>
           </div>
           <Footer />

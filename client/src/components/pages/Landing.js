@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./../assets/Landing.css";
 import SmoothScroll from "smooth-scroll";
-import logo from "../images/keyboard.svg";
+import logo from "../images/leaf.svg";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,

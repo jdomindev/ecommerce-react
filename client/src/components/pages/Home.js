@@ -26,9 +26,7 @@ export default function Home(props) {
             <>
               <Product products={products} onAddToCart={onAddToCart} />
             </>
-            
         )}
-        
       </div>
     </>
   );
