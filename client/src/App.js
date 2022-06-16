@@ -74,6 +74,10 @@ function App() {
     }
   }
 
+  const onDeleteFromCart = (product) => {
+    setCartItems(cartItems.filter(x => x._id !== product._id))
+  }
+
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems))
   }, [cartItems]);
@@ -98,7 +102,7 @@ function App() {
               <Signup />
             </Route>
             <Route exact path="/cart">
-            <Cart countCartItems={cartItems.length} cartItems={cartItems} onAddToCart={onAddToCart} onRemoveFromCart={onRemoveFromCart}/>
+            <Cart countCartItems={cartItems.length} cartItems={cartItems} onAddToCart={onAddToCart} onRemoveFromCart={onRemoveFromCart} onDeleteFromCart={onDeleteFromCart}/>
             </Route>
           </div>
           <Footer />

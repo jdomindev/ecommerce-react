@@ -6,3 +6,9 @@
     width: 25%;
     border-radius: 8px;
 }
+
+.cart-item {
+    background-color: var(--primary-color);
+    padding: 1rem;
+    border-radius: 8px;
+}

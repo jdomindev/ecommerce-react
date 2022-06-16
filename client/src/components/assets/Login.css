@@ -2,9 +2,9 @@
   margin: 2rem 0rem 2rem 0rem;
 }
 
-.login-card {
+.login-card, .cart-card {
     width: 100%;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 8px;
     background-color: var(--tertiary-color);
     color: var(--off-white-color);
@@ -19,6 +19,9 @@
 @media only screen and (min-width: 1024px) {
 
 .login-card {
+  width: 40%;
+}
+.cart-card {
   width: 40%;
 }
   

@@ -15,7 +15,6 @@ export default function Product(props) {
         {loading ? (
           <div>Loading...</div>
         ) : (
-            <div className="container">
                 <div className="row m-0 justify-content-center">
                     {products.map((product) => {
                     return (
@@ -37,7 +36,6 @@ export default function Product(props) {
                     );
                     })}
                 </div>
-            </div>
         )}
     </div>
     
