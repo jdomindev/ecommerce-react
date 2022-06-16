@@ -1,8 +1,6 @@
 import React from "react";
 import "../assets/Carousel.css"
-import caro1 from "../images/caro1.jpg"
-import caro2 from "../images/caro2.jpg"
-import caro3 from "../images/caro3.jpg"
+import temp from "../images/leaf.svg"
 
 export default function Carousel() {
   return (
@@ -15,7 +13,7 @@ export default function Carousel() {
                 </ol>
                 <div className="carousel-inner">
                     <div className="carousel-item active">
-                        <img className="d-block w-100" src={caro1} alt="First slide"/>
+                        <img className="d-block w-100" src={temp} alt="First slide"/>
                         <div className="carousel-caption d-md-block">
                             <h5>Keyboards for Sale</h5>
                             <p>Exclusive deals only found here</p>
@@ -26,11 +24,11 @@ export default function Carousel() {
                             <h5>Keyboards for Sale</h5>
                             <p>Exclusive deals only found here</p>
                         </div>
-                        <img className="d-block w-100" src={caro2} alt="Second slide"/>
+                        <img className="d-block w-100" src={temp} alt="Second slide"/>
                         
                     </div>
                     <div className="carousel-item">
-                        <img className="d-block w-100" src={caro3} alt="Third slide"></img>
+                        <img className="d-block w-100" src={temp} alt="Third slide"></img>
                     </div>
                 </div>
                 <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

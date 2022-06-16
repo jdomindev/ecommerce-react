@@ -5,7 +5,7 @@
 .login-card {
     width: 100%;
     padding: 2rem;
-    border-radius: 25px;
+    border-radius: 8px;
     background-color: var(--tertiary-color);
     color: var(--off-white-color);
     /* box-shadow: 1px 1px var(--shadow-color); */

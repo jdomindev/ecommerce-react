@@ -24,7 +24,8 @@ export default function Cart(props) {
             <div className="d-flex justify-content-center">
                 <div className='card login-card'>
                     {cartItems.map(item => (
-                        <div key={item._id} className="d-flex justify-content-between">
+                        <div key={item._id} className="d-flex justify-content-between align-items-center my-2">
+                            <img src={item.image} className="cart-image" alt="cart item"/>
                             <div>{item.name}</div>
                             <div>
                                 <button onClick={() => onRemoveFromCart(item)} className="btn btn-danger">-</button>
@@ -41,7 +42,7 @@ export default function Cart(props) {
             {cartItems.length !== 0 && (
                 <>
                     <hr></hr>
-                    <div className="d-flex justify-content-center">
+                    <div className="d-flex justify-content-center pb-5">
                         <div className='card login-card'>
                            <div className="d-flex justify-content-between pb-1">
                                 <div>Items (<div className="badge">{countCartItems}</div>):</div>
