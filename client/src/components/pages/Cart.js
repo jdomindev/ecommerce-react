@@ -1,38 +1,60 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 // import { Link } from "react-router-dom";
-
+import { loadStripe } from '@stripe/stripe-js'
+import { useLazyQuery } from '@apollo/client';
+import { QUERY_CHECKOUT } from '../../utils/queries';
 import "../assets/Cart.css";
 
+// `${process.env.STRIPE_PUBLIC_KEY}`
+const stripePromise = loadStripe('pk_test_51LIUvTJAwJ0NAqdWYNzagEqGwoHnV97chBf2JDlTiAjLIDCzAwF3G17jQVj2Mjt8UzCiMZBIL97smrPI6da9CCmv00F6HteyiR');
 
 export default function Cart(props) {
-    const {onAddToCart, onRemoveFromCart, cartItems, countCartItems, onDeleteFromCart} = props
+    const {onAddToCart, onRemoveFromCart, cartItems, productIds, onDeleteFromCart} = props
 
     const itemsPrice = cartItems.reduce((a,c) => a + c.price * c.quantity, 0);
     const taxPrice = itemsPrice * .06;
     const shippingPrice = itemsPrice > 50 ? 0 : 12;
     const totalPrice = itemsPrice + taxPrice + shippingPrice
+    
+    const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
+    useEffect(() => {
+        if (data) {
+          stripePromise.then((res) => {
+            res.redirectToCheckout({ sessionId: data.checkout.session });
+          });
+        } 
+        
+      }, [data]);
 
+    
+    const submitCheckout = () => {
+
+        getCheckout ({
+            variables: { products: productIds },
+        });
+
+    }
 
   return (
     <>
         <div>
             {cartItems.length === 0 && <div>Cart is Empty</div>}
-        </div>
+        </div>`
             <div className="d-flex justify-content-center my-5">
-                <div className='card cart-card'>
+                <div className='cart-item-container'>
                     {cartItems.map(item => (
                         <div key={item._id} className="cart-item d-flex justify-content-between align-items-center my-2">
                             <img src={item.image} className="cart-image" alt="cart item"/>
-                            <div>{item.name}</div>
+                            <h5>{item.name}</h5>
                             <div>
-                                <button onClick={() => onRemoveFromCart(item)} className="btn btn-danger">-</button>
-                                <button onClick={() => onAddToCart(item)} className="btn btn-success">+</button>
+                                <button onClick={() => onRemoveFromCart(item)} className="btn btn-danger m-1"><i className="fa-solid fa-minus"></i></button>
+                                <button onClick={() => onAddToCart(item)} className="btn btn-success m-1"><i className="fa-solid fa-plus"></i></button>
                             </div>
-                            <div>
+                            <h6>
                                 {item.quantity} x {item.price}
-                            </div>
-                            <button onClick={() => onDeleteFromCart(item)} className="btn btn-secondary">x</button>
+                            </h6>
+                            <button onClick={() => onDeleteFromCart(item)} className="btn btn-secondary"><i className="fa-solid fa-trash"></i></button>
                         </div>
                         
                     ))}
@@ -42,30 +64,30 @@ export default function Cart(props) {
                 <>
                     <hr></hr>
                     <div className="d-flex justify-content-center my-5">
-                        <div className='card cart-card'>
+                        <div className='cart-item-container'>
                             <div className="cart-item">
                                 <div className="d-flex justify-content-between pb-1">
-                                    <div>Items (<div className="badge">{countCartItems}</div>):</div>
-                                    <div className=''>${itemsPrice.toFixed(2)}</div>
+                                    <h6>Items (<div className="badge">{productIds.length}</div>)</h6>
+                                    <h6>${itemsPrice.toFixed(2)}</h6>
                                 </div>
                                 <div className="d-flex justify-content-between pb-1">
-                                    <div>Taxes:</div>
-                                    <div>${taxPrice.toFixed(2)}</div>
+                                    <h6>Taxes</h6>
+                                    <h6>${taxPrice.toFixed(2)}</h6>
                                 </div>
                                 <div className="d-flex justify-content-between pb-1">
-                                    <div>Shipping & handling:</div>
-                                    <div>${shippingPrice.toFixed(2)}</div>
+                                    <h6>Shipping & handling</h6>
+                                    <h6>${shippingPrice.toFixed(2)}</h6>
                                 </div>
                             </div>
                             <hr></hr>
                             <div className="cart-item">
                                 <div className="d-flex font-weight-bold justify-content-between pt-1">
-                                    <div className="font-weight-bold">Total Price</div>
-                                    <div>${totalPrice.toFixed(2)}</div>
+                                    <h6 className="font-weight-bold">Total Price</h6>
+                                    <h6>${totalPrice.toFixed(2)}</h6>
                                 </div>
                             </div>
                             <div className="d-flex justify-content-end button-margin">
-                                <button className="btn btn-success" onClick={() => alert('Implement Checkout')}>Checkout</button>
+                                <button className="btn btn-success" onClick={submitCheckout}>Checkout</button>
                             </div>
                             
                         </div>

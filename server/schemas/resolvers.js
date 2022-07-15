@@ -1,19 +1,21 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Address, Product, Payment, Order } = require('../models');
+const { User, Address, Product, Order } = require('../models');
 const { signToken } = require('../utils/auth');
+const stripe = require('stripe')('sk_test_51LIUvTJAwJ0NAqdWu6kWFyoAasgJcuAnPmaPr3nfBn5Z42QZsd9uoMNqOgsdtMQCLy4cmscPdCeZ27mm2bb8aM2r00bdFuYOJS')
+// ''
 
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      // if (context.user) {
+      if (context.user) {
         // context.user
-        const userFound = await User.findOne({ _id: args._id }).select("-__v -password").populate('orders').populate('products');
+        const userFound = await User.findOne({ _id: context.user._id }).select("-__v -password").populate('orders').populate('products');
         // console.log(userFound)
         // console.log(context.user)
         // _id: context.user._id
 
         return userFound
-      // }
+      }
       // throw new AuthenticationError('You need to be logged in!');
     },
     
@@ -21,20 +23,80 @@ const resolvers = {
       return Product.find();
     },
 
-    orders: async () => {
-      return Order.find()
+    order: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'orders.products',
+          populate: 'category'
+        });
+
+        return user.orders.id(_id);
+      }
+
+      throw new AuthenticationError('Not logged in');
     },
 
     addresses: async () => {
       return Address.find()
     },
+    
+    checkout: async (parent, args, context) => {
+      // ISSUE SOMEWHERE IN THIS CHECKOUT RESOLVER, SESSION ID DATA DOESN'T REACH FRONT END
+      const url = new URL(context.headers.referer).origin;
+      const line_items = [];
+      
+      const order = new Order({ products: args.products });
+
+      const { products } = await order.populate('products').execPopulate();
+
+      // Loop is only iterating once and only the product is created, price variable not showing in log
+
+      for (let i = 0; i < products.length; i++) {
+        const product = await stripe.products.create({
+          name: products[i].name,
+          description: products[i].description,
+          images: [`${url}/images/${products[i].image}`]
+        });
+        
+
+        const price = await stripe.prices.create({
+          product: product.id,
+          unit_amount: Math.round(products[i].price * 100),
+          currency: 'usd',
+        });
 
 
+        line_items.push({
+          price: price.id,
+          quantity: 1
+        });
+        console.log(price)
+
+      }
+
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items,
+        mode: 'payment',
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`
+      });
+      
+
+      return { session: session.id };
+    }
   },
 
   Mutation: {
     addUser: async (parent, { email, password, firstName, lastName }) => {
       const user = await User.create({ email, password, firstName, lastName });
+      const token = signToken(user);
+
+      return { token, user };
+    },
+
+    updateUser: async (parent, { email, password, firstName, lastName }) => {
+      const user = await User.findOneAndUpdate({ email, password, firstName, lastName });
       const token = signToken(user);
 
       return { token, user };
@@ -68,19 +130,16 @@ const resolvers = {
       // { $set: { fandoms: args.fandomsArray } },
     },
 
-    addOrder: async (parent, {userId, orderId}, context) => {
-      // if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-              { _id: userId },
-              { $set: { orders: orderId } },
-              { new: true, runValidators: true }
-          ).populate('orders').populate('products')
-      return updatedUser; 
-      // }
-      // throw new AuthenticationError('You need to be logged in!');
-      // { _id: context.user._id },
-      // { $push: { fandoms: args.fandomId } },
-      // { $set: { fandoms: args.fandomsArray } },
+    addOrder: async (parent, { products }, context) => {
+      if (context.user) {
+        const order = new Order({ products });
+
+        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+
+        return order;
+      }
+
+      throw new AuthenticationError('Not logged in');
     },
 
 

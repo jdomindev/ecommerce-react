@@ -6,13 +6,13 @@ import logo from "../images/leaf.svg";
 
 import auth from "../../utils/auth";
 
-function NavTabs(props) {
-  const {countCartItems} = props
+export default function NavTabs(props) {
+  const {productIds} = props
 
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark sticky-top">
-      <Link className="navbar-brand" to="/home">
+      <Link className="navbar-brand" to="/">
         <img src={logo} width="50" alt="leaf logo" />
       </Link>
       <button
@@ -32,13 +32,8 @@ function NavTabs(props) {
             <>
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link className="navbar-brand nav-link" to="/profile">
-                  Profile <i className="fa-solid fa-user"></i>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="navbar-brand nav-link" to="/wishlist">
-                  Wishlist <i className="fa-solid fa-rectangle-list"></i>
+                <Link className="navbar-brand nav-link" to="/about">
+                  About Us <i className="fa-solid fa-user"></i>
                 </Link>
               </li>
             </ul>
@@ -47,8 +42,8 @@ function NavTabs(props) {
                 <Link className="navbar-brand nav-link" to="/cart">
                   
                   Cart <i className="fa-solid fa-cart-shopping"></i> {' '}
-                  {countCartItems ? (
-                    <button className="badge">{countCartItems}</button>
+                  {productIds ? (
+                    <button className="badge">{productIds.length}</button>
                   ) : (
                     ''
                   )}
@@ -82,5 +77,3 @@ function NavTabs(props) {
     </nav>
   );
 }
-
-export default NavTabs;

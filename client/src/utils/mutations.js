@@ -25,3 +25,22 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+// update user mutation
+
+export const ADD_ORDER = gql`
+  mutation addOrder($products: [ID]!) {
+    addOrder(products: $products) {
+      products {
+        _id
+        name
+        description
+        price
+        quantity
+        category {
+          name
+        }
+      }
+    }
+  }
+`;

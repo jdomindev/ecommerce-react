@@ -1,34 +1,80 @@
+/* MAIN */
+
 :root {
-    --primary-color: #4a6094;
-    --secondary-color: #b3c9ff;
-    --tertiary-color: #87a2e0;
-    --4th-color: #baa066;
-    --5th-color: #e0c687;
-    --background-color: #e6f0ef;
-    --shadow-color: rgba(0, 5, 17, 0.5);
+  --primary-color: rgb(74, 96, 148);
+  --secondary-color: #b3c9ff;
+  --tertiary-color: #87a2e0;
+  --4th-color: #baa066;
+  --5th-color: #e0c687;
+  --off-white-color: #e6f0ef;
+  --shadow-color: rgba(0, 5, 17, 0.5);
+  --background-color: rgb(120, 120, 120);
 }
+
 
 a {
-  color: var(--secondary-color);
   text-decoration: none;
+  color: var(--off-white-color);
+}
+
+body {
+  background-color: var(--secondary-color); 
 }
 
 
-body,
-html {
-  font-family: "Open Sans", sans-serif;
-  text-rendering: optimizeLegibility !important;
-  -webkit-font-smoothing: antialiased !important;
-  font-weight: 400;
-  font-family: 'Open Sans', sans-serif;
-  scroll-behavior: smooth;
+/* Header Section */
+.header {
+  margin: 1rem 0rem 1rem 0rem;
+  text-align: center;
 }
 
+/* login + sign-up buttons */
+.btn-custom {
+  text-transform: uppercase;
+  color: #fff;
+  background-color: var(--4th-color);
+  background-image: linear-gradient(to right, var(--4th-color) 0%, var(--5th-color) 100%);
+  padding: 1rem 1.5rem;
+  letter-spacing: 1px;
+  margin: 16px 0 16px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.5s linear;
+  border-radius: 15px;
+  border: none;
+  box-shadow: 1px 1px var(--shadow-color);
 
+}
 
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom.focus,
+.btn-custom:active,
+.btn-custom.active {
+  color: #fff;
+  background-image: none;
+  background-color: var(--5th-color);
+}
 
-@media only screen and (max-width: 768px) {
+.btn:active,
+.btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
 
+a:focus,
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  outline: none;
+  outline-offset: none;
+}
 
-  
+.btn-success:disabled {
+  background-color: var(--4th-color);
 }
