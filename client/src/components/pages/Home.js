@@ -5,7 +5,6 @@ import "../assets/Main.css";
 import Carousel from "../layout/Carousel";
 import Product from "../layout/Product";
 
-// need to get all products
 
 export default function Home(props) {
   const {onAddToCart} = props

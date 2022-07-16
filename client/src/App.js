@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useLayoutEffect} from "react";
 import {
   ApolloClient,
   InMemoryCache,
@@ -52,7 +52,7 @@ function App() {
   const [cartItems, setCartItems] = useState(cartFromLocalStorage);
 
   const productIds = () => {
-    const productIds = [];
+    let productIds = [];
 
     cartItems.forEach((item) => {
       for (let i = 0; i < item.quantity; i++) {
@@ -113,7 +113,7 @@ function App() {
               <Signup />
             </Route>
             <Route exact path="/success">
-              <Success />
+              <Success  cartItems={cartItems} productIds={productIds()}/>
             </Route>
             <Route exact path="/cart">
               <Cart
