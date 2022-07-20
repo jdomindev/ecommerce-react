@@ -12,8 +12,9 @@ export default function NavTabs(props) {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark sticky-top">
-      <Link className="navbar-brand" to="/">
-        <img src={logo} width="50" alt="leaf logo" />
+      <Link className="navbar-brand d-flex align-items-center" to="/">
+        <img className="mr-3" src={logo} width="50" alt="leaf logo" />
+        <h2 className="no-style">Plant Store</h2>
       </Link>
       <button
         className="navbar-toggler"
@@ -58,6 +59,13 @@ export default function NavTabs(props) {
           )}
           {!auth.loggedIn() && (
             <>
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <Link className="navbar-brand nav-link" to="/about">
+                  About Us <i className="fa-solid fa-user"></i>
+                </Link>
+              </li>
+            </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link className="navbar-brand nav-link" to="/login">

@@ -12,6 +12,12 @@
   color: var(--off-white-color);
 }
 
+.no-style {
+	margin: 0;
+	padding: 0;
+	color: var(--off-white-color);
+}
+
 button {
 	background: none;
 	color: inherit;

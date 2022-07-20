@@ -5,7 +5,7 @@ import temp from "../images/leaf.svg"
 export default function Carousel() {
   return (
     <>  
-            <div id="carouselExampleIndicators" className="carousel slide " data-ride="carousel" data-pause="hover">
+            <div id="carouselExampleIndicators" data-ride="carousel" data-pause="hover">
                 <ol className="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -13,7 +13,7 @@ export default function Carousel() {
                 </ol>
                 <div className="carousel-inner">
                     <div className="carousel-item active">
-                        <img className="d-block w-100" src={temp} alt="First slide"/>
+                        <img className="d-block w-50" src={temp} alt="First slide"/>
                         <div className="carousel-caption d-md-block">
                             <h5>Keyboards for Sale</h5>
                             <p>Exclusive deals only found here</p>
@@ -24,11 +24,11 @@ export default function Carousel() {
                             <h5>Keyboards for Sale</h5>
                             <p>Exclusive deals only found here</p>
                         </div>
-                        <img className="d-block w-100" src={temp} alt="Second slide"/>
+                        <img className="d-block w-50" src={temp} alt="Second slide"/>
                         
                     </div>
                     <div className="carousel-item">
-                        <img className="d-block w-100" src={temp} alt="Third slide"></img>
+                        <img className="d-block w-50" src={temp} alt="Third slide"></img>
                     </div>
                 </div>
                 <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

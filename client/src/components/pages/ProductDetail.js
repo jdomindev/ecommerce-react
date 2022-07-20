@@ -43,7 +43,7 @@ export default function ProductDetail(props) {
 
           <p>
             <strong>Price:</strong>${currentProduct.price}{' '}
-            <button className="btn btn-primary" onClick={onAddToCart}>Add to Cart</button>
+            <button className="btn btn-primary" onClick={() => onAddToCart(currentProduct)}>Add to Cart</button>
           </p>
 
           

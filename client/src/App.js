@@ -118,7 +118,7 @@ function App() {
               <Signup />
             </Route>
             <Route exact path="/products/:id">
-              <ProductDetail/>
+              <ProductDetail onAddToCart={onAddToCart}/>
             </Route>
             <Route exact path="/success">
               <Success  cartItems={cartItems} productIds={productIds()}/>

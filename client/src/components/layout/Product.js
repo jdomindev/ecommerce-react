@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_PRODUCTS } from "../../utils/queries";
 import "../assets/Product.css";
+import spinner from '../assets/spinner.gif';
 
 
 export default function Product(props) {
@@ -13,7 +14,9 @@ export default function Product(props) {
   return (
     <div>
         {loading ? (
-          <div>Loading...</div>
+            <div className="d-flex justify-content-center align-items-center mt-5">
+                <img src={spinner} alt="loading" />
+            </div>
         ) : (
                 <div className="row m-0 justify-content-center">
                     {products.map((product) => {
