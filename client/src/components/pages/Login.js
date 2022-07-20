@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
-import logo from '../images/leaf.svg';
 import { Form, Button, Card } from 'react-bootstrap'
 import "../assets/Login.css"
 
@@ -47,15 +46,13 @@ const Login = () => {
 
   return (
     <>
-      <div className="col-md-12 header">
-        <div className='d-flex justify-content-center'>
-          <img src={logo} width="25%" alt="Ecommerce React" />
-        </div>
-      </div>
     
         <div className='col-md-12'>
             <div className='d-flex justify-content-center form-container'>
                 <Card className='login-card'>
+                  <div className='d-flex justify-content-center'>
+                    <h2>Login</h2>
+                  </div>
                     <Form onSubmit={handleFormSubmit} className="login-form">
                     <Form.Group >
                         <Form.Label htmlFor='email'>Email</Form.Label>

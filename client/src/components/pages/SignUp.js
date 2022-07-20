@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert, Card } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-import logo from '../images/leaf.svg';
 import "./../assets/SignUp.css"
 
 import Auth from '../../utils/auth';
@@ -53,15 +52,13 @@ const Signup = () => {
 
   return (
     <>
-    <div className="col-md-12 header">
-        <div className='d-flex justify-content-center'>
-        <img src={logo} width="25%" alt="Ecommerce React" />
-        </div>
-    </div>
     
     <div className='col-md-12'>
         <div className='d-flex justify-content-center form-container'>
           <Card className='login-card'>
+            <div className='d-flex justify-content-center'>
+              <h2>Create Account</h2>
+            </div>
               {/* This is needed for the validation functionality above */}
               <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
                   {/* show alert if server response is bad */}

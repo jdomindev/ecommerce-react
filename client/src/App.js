@@ -6,15 +6,17 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
 import "./App.css";
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/SignUp";
 import Home from "./components/pages/Home";
 import Cart from "./components/pages/Cart";
+import ProductDetail from "./components/pages/ProductDetail";
 import Success from './components/pages/Success';
 
+import auth from "./utils/auth";
 
 import NavTabs from "./components/layout/NavTabs";
 import Footer from "./components/layout/Footer";
@@ -64,6 +66,7 @@ function App() {
   };
 
   const onAddToCart = (product) => {
+    if(auth.loggedIn()) {
     const exist = cartItems.find((x) => x._id === product._id);
     if (exist) {
       setCartItems(
@@ -73,6 +76,8 @@ function App() {
       );
     } else {
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }} else {
+      window.location.assign("/login")
     }
   };
 
@@ -111,6 +116,9 @@ function App() {
             </Route>
             <Route exact path="/signup">
               <Signup />
+            </Route>
+            <Route exact path="/products/:id">
+              <ProductDetail/>
             </Route>
             <Route exact path="/success">
               <Success  cartItems={cartItems} productIds={productIds()}/>
