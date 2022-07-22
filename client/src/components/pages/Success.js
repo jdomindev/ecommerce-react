@@ -8,7 +8,7 @@ import { ADD_ORDER } from "../../utils/mutations";
 // need to delete items from cart after order is added
 const Success = (props) => {
   const [addOrder] = useMutation(ADD_ORDER);
-  const { productIds, cartItems, onDeleteFromCart } = props;
+  const { cartItems } = props;
 
   useEffect(() => {
     async function saveOrder() {
@@ -33,7 +33,7 @@ const Success = (props) => {
     }
 
     saveOrder();
-  }, [addOrder]);
+  }, [addOrder, cartItems]);
 
   return (
     <div className="d-flex justify-content-center mt-5">

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useLayoutEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   ApolloClient,
   InMemoryCache,
@@ -6,7 +6,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import "./App.css";
 import Login from "./components/pages/Login";

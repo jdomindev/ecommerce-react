@@ -4,10 +4,6 @@
   border-color: var(--off-white-color);
 }
 
-.nav-link:hover {
-  color: var(--4th-color);
-}
-
 .nav-link:active {
   color: var(--off-white-color);
 }

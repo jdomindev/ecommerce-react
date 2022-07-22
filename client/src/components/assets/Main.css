@@ -11,6 +11,16 @@
   --background-color: rgb(120, 120, 120);
 }
 
+body,
+html {
+  font-family: "Open Sans", sans-serif;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  font-weight: 400;
+  font-family: 'Open Sans', sans-serif;
+  scroll-behavior: smooth;
+}
+
 
 a {
   text-decoration: none;
