@@ -5,17 +5,21 @@ const stripe = require('stripe')(`${process.env.STRIPE_PRIVATE_KEY}`);
 
 const resolvers = {
   Query: {
+
     me: async (parent, args, context) => {
       if (context.user) {
         // context.user
-        const userFound = await User.findOne({ _id: context.user._id }).select("-__v -password").populate('orders').populate('products');
-        // console.log(userFound)
-        // console.log(context.user)
+        const userFound = await User.findOne({ _id: context.user._id }).select("-__v -password").populate({
+          path: 'orders.products',
+          populate: 'category'
+        });
+        console.log(userFound)
         // _id: context.user._id
+        userFound.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
 
         return userFound
       }
-      // throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in!');
     },
     
     products: async () => {
@@ -40,15 +44,12 @@ const resolvers = {
     },
     
     checkout: async (parent, args, context) => {
-      // ISSUE SOMEWHERE IN THIS CHECKOUT RESOLVER, SESSION ID DATA DOESN'T REACH FRONT END
       const url = new URL(context.headers.referer).origin;
       const line_items = [];
       
       const order = new Order({ products: args.products });
 
       const { products } = await order.populate('products').execPopulate();
-
-      // Loop is only iterating once and only the product is created, price variable not showing in log
 
       for (let i = 0; i < products.length; i++) {
         const product = await stripe.products.create({

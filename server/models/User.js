@@ -1,5 +1,7 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
+const Order = require('./Order');
+
 
 const userSchema = new Schema({
   email: {
@@ -21,12 +23,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  orders: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Order",
-    }
-  ]
+  orders: [Order.schema]
 },
 { timestamps: true }
 );

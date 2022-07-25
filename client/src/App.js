@@ -15,6 +15,7 @@ import Home from "./components/pages/Home";
 import Cart from "./components/pages/Cart";
 import ProductDetail from "./components/pages/ProductDetail";
 import Success from './components/pages/Success';
+import Profile from './components/pages/Profile';
 
 import auth from "./utils/auth";
 
@@ -119,6 +120,9 @@ function App() {
             </Route>
             <Route exact path="/products/:id">
               <ProductDetail onAddToCart={onAddToCart}/>
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
             </Route>
             <Route exact path="/success">
               <Success  cartItems={cartItems} productIds={productIds()}/>

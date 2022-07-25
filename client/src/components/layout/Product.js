@@ -35,7 +35,10 @@ export default function Product(props) {
                       <strong>Price: </strong>
                       ${product.price}
                     </h5>
-                    {/* <p className="card-text">{product.description}</p> */}
+                    <details>
+                    <summary>Description</summary>
+                      <p className="card-text pt-2">{product.description}</p>
+                    </details>
                   </div>
                   <div className="d-flex justify-content-end card-padding pt-0">
                     <button className="btn btn-secondary mr-1">

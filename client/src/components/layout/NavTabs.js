@@ -9,7 +9,6 @@ import auth from "../../utils/auth";
 export default function NavTabs(props) {
   const {productIds} = props
 
-
   return (
     <nav className="navbar navbar-expand-lg navbar-dark sticky-top">
       <Link className="navbar-brand d-flex align-items-center" to="/">
@@ -33,8 +32,8 @@ export default function NavTabs(props) {
             <>
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link className="navbar-brand nav-link" to="/about">
-                  About Us <i className="fa-solid fa-user"></i>
+                <Link className="navbar-brand nav-link" to="/profile/">
+                  Profile <i className="fa-solid fa-user"></i>
                 </Link>
               </li>
             </ul>
@@ -59,13 +58,6 @@ export default function NavTabs(props) {
           )}
           {!auth.loggedIn() && (
             <>
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link className="navbar-brand nav-link" to="/about">
-                  About Us <i className="fa-solid fa-user"></i>
-                </Link>
-              </li>
-            </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link className="navbar-brand nav-link" to="/login">

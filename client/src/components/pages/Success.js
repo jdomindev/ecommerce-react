@@ -18,7 +18,6 @@ const Success = (props) => {
 
       if (products.length) {
         await addOrder({ variables: { products } });
-    //   On successful order only one cart item gets deleted, need all 
         
         cartItems.forEach((index, object) => {
             cartItems.splice(index);

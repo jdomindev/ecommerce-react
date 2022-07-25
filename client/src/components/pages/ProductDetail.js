@@ -16,7 +16,6 @@ export default function ProductDetail(props) {
   const [currentProduct, setCurrentProduct] = useState({});
 
   useEffect(() => {
-    // already in global store
     if (products.length) {
       setCurrentProduct(products.find((product) => product._id === id));
     }
@@ -46,10 +45,10 @@ export default function ProductDetail(props) {
               </div>
               <div className="card-padding">
                   <h2>{currentProduct.name}</h2>
-                  <p>{currentProduct.description}</p>
                   <h5>
                   <strong>Price: </strong> ${currentProduct.price}{" "}
                   </h5>
+                  <p>{currentProduct.description}</p>
                   <button
                     className="btn btn-primary"
                     onClick={() => onAddToCart(currentProduct)}
