@@ -1,20 +1,26 @@
 .button-margin {
-    margin-top: 2rem;
+    margin: 1rem 0;
 }
 
-.cart-item-container {
-    width: 50%;
-}
+
 
 .cart-image {
-    width: 25%;
-    height: auto;
-    border-radius: 2px;
+    width: auto;
+    max-height: 100px;
+    min-width: 90px;
+    margin: 0 .5rem 0 0;
 }
 
-.cart-item {
+.cart-item, .order-item {
     color: var(--off-white-color);
     background-color: var(--primary-color);
     padding: 1rem;
     border-radius: 2px;
+}
+
+
+@media only screen and (min-width: 1024px) {
+    .cart-item-container {
+        width: 50%;
+    }
 }

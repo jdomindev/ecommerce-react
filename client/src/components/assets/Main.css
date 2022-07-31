@@ -99,6 +99,8 @@ a:focus,
 }
 
 
+/* PROFILE CLASSES */
+
 .order-image {
   width: auto;
   max-height: 100px;
@@ -113,13 +115,13 @@ a:focus,
   border-radius: 2px;
 }
 
-/* margin class for desktop */
-
 
 @media only screen and (min-width: 1024px) {
   .order-image {
       width: auto;
       max-height: 200px;
+      min-width: 170px;
+      border-radius: 2px;
   }
 
   .order-container {

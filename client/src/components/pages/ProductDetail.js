@@ -34,7 +34,7 @@ export default function ProductDetail(props) {
             <Link to="/" className="back-icon "><i class="fa-solid fa-arrow-left"></i> Back to Products</Link>
         </div>
         <div className="m-3">
-          <div className="card container p-0">
+          <div className="card product-card container p-0">
             <div className="flex">
               <div>
                 <img

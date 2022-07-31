@@ -23,11 +23,14 @@ export default function Profile(props) {
 
           {user ? (
             <>
-              <h2 className="py-3">
-                <strong>{user.firstName}'s Order History</strong>
+              <h2 className="pt-3">
+                <strong>{user.firstName}'s Profile</strong>
               </h2>
+              <h3 className="py-3">
+                <strong>Order History</strong>
+              </h3>
               {user.orders.map((order) => (
-                <div key={order._id} className="card cart-item my-2">
+                <div key={order._id} className="card order-item mb-4">
                   <div className="">
                     <h4 className="float-left order-text-title">Order Summary</h4>
                     <h4 className="text-right order-text-title">

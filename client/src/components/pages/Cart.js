@@ -49,16 +49,19 @@ export default function Cart(props) {
           </div>
         )}
       </div>
-      `
-      <div className="d-flex justify-content-center my-5">
-        <div className="cart-item-container">
+        
+              
+        <div className="container cart-item-container">
+              <h2 className="py-3">
+                <strong>Your Cart</strong>
+              </h2>
           {cartItems.map((item) => (
             <div
               key={item._id}
-              className="cart-item d-flex justify-content-between align-items-center my-2"
+              className="cart-item d-flex justify-content-between align-items-center"
             >
               <img src={item.image} className="cart-image" alt="cart item" />
-              <h5>{item.name}</h5>
+              <h5 className="order-text">{item.name}</h5>
               <div>
                 <button
                   onClick={() => onRemoveFromCart(item)}
@@ -73,7 +76,7 @@ export default function Cart(props) {
                   <i className="fa-solid fa-plus"></i>
                 </button>
               </div>
-              <h6>
+              <h6 className="order-text">
                 {item.quantity} x {item.price}
               </h6>
               <button
@@ -84,45 +87,47 @@ export default function Cart(props) {
               </button>
             </div>
           ))}
-        </div>
-      </div>
-      {cartItems.length !== 0 && (
-        <>
-          <hr></hr>
-          <div className="d-flex justify-content-center my-5">
-            <div className="cart-item-container">
-              <div className="cart-item">
-                <div className="d-flex justify-content-between pb-1">
-                  <h6>
-                    Items (<div className="badge">{productIds.length}</div>)
-                  </h6>
-                  <h6>${itemsPrice.toFixed(2)}</h6>
-                </div>
-                <div className="d-flex justify-content-between pb-1">
-                  <h6>Taxes</h6>
-                  <h6>${taxPrice.toFixed(2)}</h6>
-                </div>
-                <div className="d-flex justify-content-between pb-1">
-                  <h6>Shipping & handling</h6>
-                  <h6>${shippingPrice.toFixed(2)}</h6>
-                </div>
-              </div>
+          {cartItems.length !== 0 && (
+            <>
               <hr></hr>
-              <div className="cart-item">
-                <div className="d-flex font-weight-bold justify-content-between pt-1">
-                  <h6 className="font-weight-bold">Total Price</h6>
-                  <h6>${totalPrice.toFixed(2)}</h6>
+              <div className="d-flex justify-content-center">
+                <div className="w-100">
+                  <div className="cart-item">
+                    <div className="d-flex justify-content-between pb-1">
+                      <h6>
+                        Items (<div className="badge">{productIds.length}</div>)
+                      </h6>
+                      <h6>${itemsPrice.toFixed(2)}</h6>
+                    </div>
+                    <div className="d-flex justify-content-between pb-1">
+                      <h6>Taxes</h6>
+                      <h6>${taxPrice.toFixed(2)}</h6>
+                    </div>
+                    <div className="d-flex justify-content-between pb-1">
+                      <h6>Shipping & handling</h6>
+                      <h6>${shippingPrice.toFixed(2)}</h6>
+                    </div>
+                  </div>
+                  <div className="cart-item">
+                    <div className="d-flex font-weight-bold justify-content-between pt-1">
+                      <h6 className="font-weight-bold">Total Price</h6>
+                      <h6>${totalPrice.toFixed(2)}</h6>
+                    </div>
+                    
+                  </div>
+                  <div className="text-right button-margin ">
+                      <button
+                        className="btn btn-success"
+                        onClick={submitCheckout}
+                      >
+                        Checkout
+                      </button>
+                    </div>
                 </div>
               </div>
-              <div className="d-flex justify-content-end button-margin">
-                <button className="btn btn-success" onClick={submitCheckout}>
-                  Checkout
-                </button>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
+            </>
+          )}
+        </div>
     </>
   );
 }
