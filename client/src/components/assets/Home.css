@@ -9,13 +9,15 @@
     border-radius: 5px 0px 0px 5px;
     border: var(--4th-color) 1px solid;
     padding: .5rem;
-    width: 60%;
+    width: 80%;
 }
 
 #search:focus {
     outline: var(--4th-color) 1.75px solid;
 
 }
+
+
 
 .search-icon {
     display: flex;

@@ -32,7 +32,7 @@ export default function NavTabs(props) {
             <>
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link className="navbar-brand nav-link" to="/profile/">
+                <Link className="navbar-brand nav-link" to="/profile">
                   Profile <i className="fa-solid fa-user"></i>
                 </Link>
               </li>
@@ -43,7 +43,7 @@ export default function NavTabs(props) {
                   
                   Cart <i className="fa-solid fa-cart-shopping"></i> {' '}
                   {productIds ? (
-                    <button className="badge">{productIds.length}</button>
+                    <span className="lead"><button className="badge">{productIds.length}</button></span>
                   ) : (
                     ''
                   )}

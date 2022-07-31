@@ -8,12 +8,13 @@
 
 .cart-image {
     width: 25%;
-    border-radius: 8px;
+    height: auto;
+    border-radius: 2px;
 }
 
 .cart-item {
     color: var(--off-white-color);
     background-color: var(--primary-color);
     padding: 1rem;
-    border-radius: 8px;
+    border-radius: 2px;
 }

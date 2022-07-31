@@ -7,7 +7,7 @@
         "category": "624cba2376998f159c60bfad",
         "deptCode": "01",
         "type": "key",
-        "quantity": 20,
+        "quantity": 0,
         "skuSeq": 1
     },
     {
@@ -18,7 +18,7 @@
         "category": "624cba2376998f159c60bfad",
         "deptCode": "01",
         "type": "key",
-        "quantity": 20,
+        "quantity": 0,
         "skuSeq": 2
     },
     {
@@ -29,7 +29,7 @@
         "category": "624cba2376998f159c60bfad",
         "deptCode": "01",
         "type": "key",
-        "quantity": 20,
+        "quantity": 0,
         "skuSeq": 3
     },
     {
@@ -40,7 +40,7 @@
         "category": "624cba2376998f159c60bfad",
         "deptCode": "01",
         "type": "key",
-        "quantity": 20,
+        "quantity": 0,
         "skuSeq": 4
     },
     {
@@ -51,7 +51,7 @@
         "category": "624cba2376998f159c60bfad",
         "deptCode": "01",
         "type": "key",
-        "quantity": 20,
+        "quantity": 0,
         "skuSeq": 5
     }
 ]

@@ -44,6 +44,7 @@ export const GET_ME = gql`
           price
           description
           image
+          quantity
         }
       }
     }

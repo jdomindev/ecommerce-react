@@ -35,10 +35,7 @@
     text-decoration: none;
 }
 
-.card {
-    background-color: var(--primary-color);
-    color: var(--off-white-color);
-}
+
 
 @media only screen and (min-width: 768px) {
     .flex {

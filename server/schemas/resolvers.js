@@ -13,7 +13,6 @@ const resolvers = {
           path: 'orders.products',
           populate: 'category'
         });
-        console.log(userFound)
         // _id: context.user._id
         userFound.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
 

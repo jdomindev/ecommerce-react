@@ -13,12 +13,19 @@
 
 body,
 html {
-  font-family: "Open Sans", sans-serif;
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
-  font-weight: 400;
-  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
   scroll-behavior: smooth;
+}
+
+nav, footer {
+  font-family: 'Montserrat', sans-serif;
+
+}
+
+hr {
+  border-top: 1px solid rgb(230,240,239, .3);
 }
 
 
@@ -29,6 +36,8 @@ a {
 
 body {
   background-color: var(--secondary-color); 
+  font-family: 'Lato', sans-serif;
+
 }
 
 
@@ -87,4 +96,44 @@ a:focus,
 
 .btn-success:disabled {
   background-color: var(--4th-color);
+}
+
+
+.order-image {
+  width: auto;
+  max-height: 100px;
+  min-width: 90px;
+  margin: 0 .5rem 0 0;
+}
+
+.order-card {
+  /* background-color: var(--tertiary-color); */
+  margin: 1rem 0;
+  padding: .25rem;
+  border-radius: 2px;
+}
+
+/* margin class for desktop */
+
+
+@media only screen and (min-width: 1024px) {
+  .order-image {
+      width: auto;
+      max-height: 200px;
+  }
+
+  .order-container {
+    width: 60%;
+  }
+
+  .order-text-title {
+    font-size: 1.75rem;
+  }
+  .order-text {
+    font-size: 1.25rem;
+  }
+
+  .order-items {
+    margin: 0 6rem;
+  }
 }
