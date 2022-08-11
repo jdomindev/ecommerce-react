@@ -1,13 +1,13 @@
 const db = require('../config/connection');
 const { User, Product, Category } = require('../models');
-const {getSku} = require('../utils/skuGenerator');
+const { getSku } = require('../utils/skuGenerator');
 const categorySeeds = require('./categorySeeds.json')
 
 db.once('open', async () => {
   try {
     // await User.deleteMany({});
     // await Category.deleteMany({});
-    await Product.deleteMany({});
+    // await Product.deleteMany({});
     
     // await Category.create(categorySeeds)
     await Product.create(getSku())

@@ -4,15 +4,19 @@ import { useQuery } from "@apollo/client";
 
 import "../assets/Main.css";
 import "../assets/Home.css";
-import Carousel from "../layout/Carousel";
+// import Carousel from "../layout/Carousel";
 import Product from "../layout/Product";
+import Category from "../layout/Category";
 import { GET_PRODUCTS } from "../../utils/queries";
+
 
 export default function Home(props) {
   const { onAddToCart } = props;
   const { data } = useQuery(GET_PRODUCTS);
 
+
   const products = data?.products || [];
+
   const [filteredData, setFilteredData] = useState([]);
 
   const handleFilter = async (event) => {
@@ -42,10 +46,12 @@ export default function Home(props) {
           {filteredData.length === 0 ? (
             <i className="fa-solid fa-magnifying-glass"></i>
           ) : (
-            <i class="fa-solid fa-x"></i>
+            <i className="fa-solid fa-x"></i>
           )}
         </button>
+        <Category />
       </div>
+      
       <div>
         {filteredData.length !== 0 && (
           <>
