@@ -35,25 +35,16 @@ export default function Home(props) {
   return (
     <>
       {/* <Carousel /> */}
-      <div className="search-bar d-flex justify-content-center">
-        <input
-          id="search"
-          type="text"
-          placeholder="Enter search"
-          onChange={handleFilter}
-        ></input>
-        <button className="search-icon">
-          {filteredData.length === 0 ? (
-            <i className="fa-solid fa-magnifying-glass"></i>
-          ) : (
-            <i className="fa-solid fa-x"></i>
-          )}
-        </button>
-        <Category />
-      </div>
+      {/* // <select className="float-right" defaultValue={'DEFAULT'}>
+          //     <option value="DEFAULT">Select an Option</option>
+          //   {categories.map((category) => { return (
+          //       <option key={category._id} value={category.name}>{category.name}</option>
+          //     )}
+          //   )}
+          // </select> */}
+      <Category products={products} />
       
       <div>
-        {filteredData.length !== 0 && (
           <>
             <div className="product-grid m-3">
               {filteredData.map((product) => {
@@ -92,10 +83,12 @@ export default function Home(props) {
               })}
             </div>
           </>
-        )}
+        ) 
+        {/* // : (
+        // <Product onAddToCart={onAddToCart} />
+        // )} */}
       </div>
 
-      <Product onAddToCart={onAddToCart} />
     </>
   );
 }

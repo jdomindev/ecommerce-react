@@ -22,7 +22,7 @@ const resolvers = {
     },
     
     products: async () => {
-      return Product.find();
+      return Product.find().populate('category');
     },
 
     categories: async () => {

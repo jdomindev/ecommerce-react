@@ -5,13 +5,13 @@
 .login-card {
     width: 100%;
     padding: 1rem;
-    border-radius: 2px;
     /* box-shadow: 1px 1px var(--shadow-color); */
 }
 
 .product-card, .login-card {
   background-color: var(--primary-color);
   color: var(--off-white-color);
+  border-radius: 2px;
 }
 
 .forgot-password {
