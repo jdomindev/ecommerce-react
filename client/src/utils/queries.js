@@ -21,20 +21,6 @@ export const GET_PRODUCTS = gql`
   }
 `;
 
-export const GET_ADDRESS = gql`
-  query address {
-    address {
-      _id
-      street
-      aptNo
-      city
-      state
-      zipCode
-      country
-    }
-  }
-`;
-
 export const QUERY_CHECKOUT = gql`
   query getCheckout($products: [ID]!) {
     checkout(products: $products) {

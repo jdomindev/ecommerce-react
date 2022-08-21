@@ -9,16 +9,17 @@
     padding: 20px;
 }
 
+#product:hover{
+    transition: top, ease .5;
+}
+
 .card-img {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    border-radius: 2px;
 }
 
-/* need better solution */
-/* .card-text {
-    height: 325px;
-} */
 .back-icon {
     background-color: var(--4th-color);
     border-radius: 5px;

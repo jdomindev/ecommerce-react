@@ -29,16 +29,18 @@ export default function Product(props) {
                       alt="product"
                     />
                   </Link>
-                  <div className="card-padding">
-                    <h2 className="card-title">{product.name}</h2>
-                    <h5>
-                      <strong>Price: </strong>
-                      ${product.price}
-                    </h5>
-                    <details>
-                    <summary>Description</summary>
-                      <p className="card-text pt-2">{product.description}</p>
-                    </details>
+                  <div className="card-move">
+                    <div className="card-padding">
+                      <h2 className="card-title">{product.name}</h2>
+                      <h5>
+                        <strong>Price: </strong>
+                        ${product.price}
+                      </h5>
+                      <details>
+                      <summary>Description</summary>
+                        <p className="card-text pt-2">{product.description}</p>
+                      </details>
+                    </div>
                   </div>
                   <div className="d-flex justify-content-end card-padding pt-0">
                     <button className="btn btn-secondary mr-1">

@@ -1,6 +1,6 @@
 const db = require('../config/connection');
 const { User, Product, Category } = require('../models');
-const {getSku} = require('../utils/skuGenerator');
+const { getSku } = require('../utils/skuGenerator');
 const categorySeeds = require('./categorySeeds.json')
 
 db.once('open', async () => {

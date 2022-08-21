@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Address, Product, Order } = require('../models');
+const { User, Address, Product, Order, Category } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')(`${process.env.STRIPE_PRIVATE_KEY}`);
 
@@ -30,7 +30,11 @@ const resolvers = {
     },
     
     products: async () => {
-      return Product.find();
+      return Product.find().populate('category');
+    },
+
+    categories: async () => {
+      return Category.find();
     },
 
     order: async (parent, { _id }, context) => {

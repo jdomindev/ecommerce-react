@@ -4,15 +4,19 @@ import { useQuery } from "@apollo/client";
 
 import "../assets/Main.css";
 import "../assets/Home.css";
-import Carousel from "../layout/Carousel";
+// import Carousel from "../layout/Carousel";
 import Product from "../layout/Product";
+import Category from "../layout/Category";
 import { GET_PRODUCTS } from "../../utils/queries";
+
 
 export default function Home(props) {
   const { onAddToCart } = props;
   const { data } = useQuery(GET_PRODUCTS);
 
+
   const products = data?.products || [];
+
   const [filteredData, setFilteredData] = useState([]);
 
   const handleFilter = async (event) => {
@@ -31,23 +35,16 @@ export default function Home(props) {
   return (
     <>
       {/* <Carousel /> */}
-      <div className="search-bar d-flex justify-content-center">
-        <input
-          id="search"
-          type="text"
-          placeholder="Enter search"
-          onChange={handleFilter}
-        ></input>
-        <button className="search-icon">
-          {filteredData.length === 0 ? (
-            <i className="fa-solid fa-magnifying-glass"></i>
-          ) : (
-            <i class="fa-solid fa-x"></i>
-          )}
-        </button>
-      </div>
+      {/* // <select className="float-right" defaultValue={'DEFAULT'}>
+          //     <option value="DEFAULT">Select an Option</option>
+          //   {categories.map((category) => { return (
+          //       <option key={category._id} value={category.name}>{category.name}</option>
+          //     )}
+          //   )}
+          // </select> */}
+      <Category products={products} />
+      
       <div>
-        {filteredData.length !== 0 && (
           <>
             <div className="product-grid m-3">
               {filteredData.map((product) => {
@@ -86,10 +83,12 @@ export default function Home(props) {
               })}
             </div>
           </>
-        )}
+        ) 
+        {/* // : (
+        // <Product onAddToCart={onAddToCart} />
+        // )} */}
       </div>
 
-      <Product onAddToCart={onAddToCart} />
     </>
   );
 }

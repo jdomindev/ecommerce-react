@@ -2,7 +2,7 @@
     background-color: var(--tertiary-color);
     color: var(--off-white-color);
     border-color: var(--off-white-color);
-    padding: 1rem;
+    padding: 0 1rem 0 1rem;
 }
 
 #search {
@@ -17,8 +17,6 @@
     outline: var(--4th-color) 1.75px solid;
 
 }
-
-
 
 .search-icon {
     display: flex;
