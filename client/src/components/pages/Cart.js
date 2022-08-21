@@ -20,14 +20,14 @@ export default function Cart(props) {
   } = props;
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0);
-  console.log(cartItems);
+  // console.log(cartItems);
   const taxPrice = itemsPrice * 0.06;
   const shippingPrice = itemsPrice > 50 ? 0 : 12;
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
   // const itemPrice = cartItems.forEach(item) => a + c.price * c.quantity, 0
 
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
-  const quantity = cartItems.map(item => item.quantity)
+  // const quantity = cartItems.map(item => item.quantity)
 
 
   useEffect(() => {

@@ -5,6 +5,9 @@ import { GET_PRODUCTS } from "../../utils/queries";
 import "../assets/Product.css";
 import spinner from "../assets/spinner.gif";
 
+// Added to cart and removed from cart alerts by cart tab
+
+
 export default function Product(props) {
   const { onAddToCart } = props;
   const { loading, data } = useQuery(GET_PRODUCTS);
@@ -33,11 +36,10 @@ export default function Product(props) {
                     <div className="card-padding">
                       <h2 className="card-title">{product.name}</h2>
                       <h5>
-                        <strong>Price: </strong>
-                        ${product.price}
+                        <strong>Price: </strong>${product.price}
                       </h5>
                       <details>
-                      <summary>Description</summary>
+                        <summary>Description</summary>
                         <p className="card-text pt-2">{product.description}</p>
                       </details>
                     </div>
@@ -49,9 +51,11 @@ export default function Product(props) {
                     <button
                       onClick={() => onAddToCart(product)}
                       className="btn btn-primary"
+                      
                     >
                       Add to Cart <i className="fa-solid fa-cart-shopping"></i>
                     </button>
+                   
                   </div>
                 </div>
               </div>

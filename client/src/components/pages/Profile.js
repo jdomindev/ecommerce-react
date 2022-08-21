@@ -11,6 +11,8 @@ export default function Profile(props) {
   const order = user?.orders
   const {cartItems} = props
   console.log(cartItems)
+
+  // Need to be able to see ordered products and a correct total price
   // function to get quantity and total price, or adjust cart quantity
  
   return (
@@ -26,10 +28,10 @@ export default function Profile(props) {
           {user ? (
             <>
             <div className="container order-container">
-              <h2 className="pt-3">
+              <h2 className="pt-3 m-0">
                 <strong>{user.firstName}'s Profile</strong>
               </h2>
-              <h3 className="py-3">
+              <h3 className="py-3 m-0">
                 <strong>Account Details</strong>
               </h3>
               <aside className="border p-3 d-flex-column">
@@ -53,7 +55,7 @@ export default function Profile(props) {
                   </Link>
                   </div>
               </aside>
-              <h3 className="py-3">
+              <h3 className="py-3 m-0">
                 <strong>Order History</strong>
               </h3>
               {user.orders.map((order) => (

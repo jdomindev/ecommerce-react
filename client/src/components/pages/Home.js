@@ -5,7 +5,6 @@ import { useQuery } from "@apollo/client";
 import "../assets/Main.css";
 import "../assets/Home.css";
 // import Carousel from "../layout/Carousel";
-import Product from "../layout/Product";
 import Category from "../layout/Category";
 import { GET_PRODUCTS } from "../../utils/queries";
 
@@ -18,19 +17,6 @@ export default function Home(props) {
   const products = data?.products || [];
 
   const [filteredData, setFilteredData] = useState([]);
-
-  const handleFilter = async (event) => {
-    const searchWord = event.target.value;
-    const newFilter = await products.filter((product) => {
-      return product.name.toLowerCase().includes(searchWord.toLowerCase());
-    });
-
-    if (searchWord === "") {
-      setFilteredData([]);
-    } else {
-      setFilteredData(newFilter);
-    }
-  };
 
   return (
     <>
@@ -89,7 +75,6 @@ export default function Home(props) {
       </div>
 
     </>
-  );
-}
+  )
+};
 
-// Break out search bar into component, make a new route for a search results page?, work on search buttons and functionality

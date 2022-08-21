@@ -23,7 +23,7 @@ import auth from "./utils/auth";
 import NavTabs from "./components/layout/NavTabs";
 import Footer from "./components/layout/Footer";
 
-import { GET_ME } from "./utils/queries";
+// import { GET_ME } from "./utils/queries";
 
 
 // CHANGE BACK AFTER DEPLOYMENT?
