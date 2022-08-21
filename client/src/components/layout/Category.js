@@ -13,7 +13,6 @@ export default function Category(props) {
 
   const { data, loading } = useQuery(GET_CATEGORIES);
   const categories = data?.categories || [];
-
   const [sortedData, setSortedData] = useState([]);
 
   const searchFunc = async (event) => {

@@ -1,34 +1,35 @@
-const { AuthenticationError } = require('apollo-server-express');
-const { User, Address, Product, Order, Category } = require('../models');
-const { signToken } = require('../utils/auth');
-const stripe = require('stripe')(`${process.env.STRIPE_PRIVATE_KEY}`);
+const { AuthenticationError } = require("apollo-server-express");
+const { User, Address, Product, Order, Category } = require("../models");
+const { signToken } = require("../utils/auth");
+const stripe = require("stripe")(`${process.env.STRIPE_PRIVATE_KEY}`);
 
 const resolvers = {
   Query: {
-
     me: async (parent, args, context) => {
       if (context.user) {
         // context.user
         // args
-        const userFound = await User.findOne({_id: context.user._id}).select("-__v -password").populate([
-          { 
-            path: 'address', 
-            populate: 'address' 
-          },
-          {
-            path: 'orders.products',
-            populate: 'category'
-          }
-        ])
+        const userFound = await User.findOne({ _id: context.user._id })
+          .select("-__v -password")
+          .populate([
+            {
+              path: "address",
+              populate: "address",
+            },
+            {
+              path: "orders.products",
+              populate: "category",
+            },
+          ]);
         // _id: context.user._id
         // _id: args._id
         userFound.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
 
-        return userFound
+        return userFound;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
-    
+
     products: async () => {
       return Product.find().populate('category');
     },
@@ -40,33 +41,33 @@ const resolvers = {
     order: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
+          path: "orders.products",
+          populate: "category",
         });
 
         return user.orders.id(_id);
       }
 
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
 
     address: async (parent, args, context) => {
       if (args) {
-        const user = await User.findById(args._id).populate('address');
+        const user = await User.findById(args._id).populate("address");
         // context.user._id
         return user.address;
       }
 
       // throw new AuthenticationError('Not logged in');
     },
-    
+
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const line_items = [];
-      
+
       const order = new Order({ products: args.products });
 
-      const { products } = await order.populate('products').execPopulate();
+      const { products } = await order.populate("products").execPopulate();
 
       for (let i = 0; i < products.length; i++) {
         const product = await stripe.products.create({
@@ -74,32 +75,28 @@ const resolvers = {
           description: products[i].description,
           images: [`${url}/images/${products[i].image}`],
         });
-        
 
         const price = await stripe.prices.create({
           product: product.id,
           unit_amount: Math.round(products[i].price * 100),
-          currency: 'usd',
+          currency: "usd",
         });
-
 
         line_items.push({
           price: price.id,
-          quantity: 1
+          quantity: 1,
         });
-
       }
       const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
+        payment_method_types: ["card"],
         line_items,
-        mode: 'payment',
+        mode: "payment",
         success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${url}/`
+        cancel_url: `${url}/`,
       });
-      
 
       return { session: session.id };
-    }
+    },
   },
 
   Mutation: {
@@ -107,13 +104,13 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('No user with this email found!');
+        throw new AuthenticationError("No user with this email found!");
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect password!');
+        throw new AuthenticationError("Incorrect password!");
       }
 
       const token = signToken(user);
@@ -131,103 +128,106 @@ const resolvers = {
       if (context.user) {
         // context.user
         // args
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
       }
       // context.user._id
       // args._id
 
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
 
     addAddress: async (parent, args, context) => {
       if (context.user) {
         const address = new Address({ args });
-        await User.findByIdAndUpdate(context.user._id, { $set: { address: address } }, { new: true });
-        return address; 
+        await User.findByIdAndUpdate(
+          context.user._id,
+          { $set: { address: address } },
+          { new: true }
+        );
+        return address;
       }
     },
 
     updateAddress: async (parent, args, context) => {
       if (context.user) {
         // context.user
-        // _id, street, aptNo, city, state, zipCode, country 
-        const address = new Address( args );
+        // _id, street, aptNo, city, state, zipCode, country
+        const address = new Address(args);
         // newAddress
-        console,log(address)
-        return await User.findByIdAndUpdate(context.user._id, 
-          { $push: 
-            { 
-              address: address
-            } 
-          }, { new: true })
+        console, log(address);
+        return await User.findByIdAndUpdate(
+          context.user._id,
+          {
+            $push: {
+              address: address,
+            },
+          },
+          { new: true }
+        );
       }
       // context.user._id
 
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
-    
+
     addOrder: async (parent, { products }, context) => {
       if (context.user) {
         const order = new Order({ products });
 
-        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+        await User.findByIdAndUpdate(context.user._id, {
+          $push: { orders: order },
+        });
 
         return order;
       }
 
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
     },
 
-
-
-    createAddress: async (parent, {streetName, aptNo, zipCode, city, state, country}, context) => {
-        const address = await Address.create({streetName, aptNo, zipCode, city, state, country})
-      return address; 
+    createAddress: async (
+      parent,
+      { streetName, aptNo, zipCode, city, state, country },
+      context
+    ) => {
+      const address = await Address.create({
+        streetName,
+        aptNo,
+        zipCode,
+        city,
+        state,
+        country,
+      });
+      return address;
     },
-    
-    
-
-    
-
-    
-      
-      
-
   },
-
-  
-  
 };
 
 module.exports = resolvers;
-
 
 // GOOD
 
 // queries
 
 // addUser
-// login 
+// login
 // createOrder (new Order)
 // addOrder (adds Order to User's orders)
 // createAddress (new Address)
 // addProduct (to Order)
 // addAddress (Addresses to Order)
 
-
 // NEED
 
 // editUser (email, password, firstName, lastName)
 // editAddress (shipping and billing)
 
-
-
-
 // User Process
 
 // signup
 // login
-// look at products OR look at profile 
+// look at products OR look at profile
 // add product to cart (addProduct)
 // save for later? wishlist vs cart?
 // checkout product ()

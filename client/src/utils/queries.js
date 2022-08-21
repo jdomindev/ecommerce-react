@@ -9,14 +9,23 @@ export const GET_PRODUCTS = gql`
       image
       description
       category {
-        _id
-        name
+          _id
+          name
       }
       deptCode
       type
       quantity
       skuSeq
       sku
+    }
+  }
+`;
+
+export const GET_CATEGORIES = gql`
+  query categories {
+    categories {
+      _id
+      name
     }
   }
 `;

@@ -83,7 +83,6 @@ export default function Home(props) {
               })}
             </div>
           </>
-        ) 
         {/* // : (
         // <Product onAddToCart={onAddToCart} />
         // )} */}
