@@ -16,11 +16,15 @@ import Cart from "./components/pages/Cart";
 import ProductDetail from "./components/pages/ProductDetail";
 import Success from './components/pages/Success';
 import Profile from './components/pages/Profile';
+import ProfileEdit from './components/pages/ProfileEdit';
 
 import auth from "./utils/auth";
 
 import NavTabs from "./components/layout/NavTabs";
 import Footer from "./components/layout/Footer";
+
+import { GET_ME } from "./utils/queries";
+
 
 // CHANGE BACK AFTER DEPLOYMENT?
 
@@ -56,8 +60,10 @@ function App() {
 
   const productIds = () => {
     let productIds = [];
+    const quantities = [];
 
     cartItems.forEach((item) => {
+      quantities.push(item.quantity)
       for (let i = 0; i < item.quantity; i++) {
         productIds.push(item._id);
       }
@@ -65,16 +71,21 @@ function App() {
     
     return productIds;
   };
-
+  
   const onAddToCart = (product) => {
+
+    
+
     if(auth.loggedIn()) {
-    const exist = cartItems.find((x) => x._id === product._id);
+      const exist = cartItems.find((x) => x._id === product._id);
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
           x._id === product._id ? { ...exist, quantity: exist.quantity + 1 } : x
         )
       );
+      
+
     } else {
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
     }} else {
@@ -122,7 +133,10 @@ function App() {
               <ProductDetail onAddToCart={onAddToCart}/>
             </Route>
             <Route exact path="/profile">
-              <Profile />
+              <Profile cartItems={cartItems} />
+            </Route>
+            <Route exact path="/profile-edit">
+              <ProfileEdit />
             </Route>
             <Route exact path="/success">
               <Success  cartItems={cartItems} productIds={productIds()}/>

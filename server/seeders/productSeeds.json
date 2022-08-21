@@ -44,6 +44,50 @@
         "skuSeq": 4
     },
     {
+        "name": "Aloe vera",
+        "price": 19.99,
+        "image": "../images/aloevera.jpg",
+        "description": "Pothos is a low maintenance perennial evergreen houseplant in the Araceae (arum) family. Desired for it's glossy, green or variegated leaves on cascading stems. It only grows 6 to 8 feet as a horizontal groundcover, but the trailing, climbing vines can grow as long as 40 feet.",
+        "category": "624cba2376998f159c60bfad",
+        "deptCode": "01",
+        "type": "key",
+        "quantity": 0,
+        "skuSeq": 5
+    },
+    {
+        "name": "Monstera",
+        "price": 19.99,
+        "image": "../images/monstera.jpg",
+        "description": "Pothos is a low maintenance perennial evergreen houseplant in the Araceae (arum) family. Desired for it's glossy, green or variegated leaves on cascading stems. It only grows 6 to 8 feet as a horizontal groundcover, but the trailing, climbing vines can grow as long as 40 feet.",
+        "category": "624cba2376998f159c60bfad",
+        "deptCode": "01",
+        "type": "key",
+        "quantity": 0,
+        "skuSeq": 6
+    },
+    {
+        "name": "Cactus",
+        "price": 19.99,
+        "image": "../images/cactus.jpg",
+        "description": "Pothos is a low maintenance perennial evergreen houseplant in the Araceae (arum) family. Desired for it's glossy, green or variegated leaves on cascading stems. It only grows 6 to 8 feet as a horizontal groundcover, but the trailing, climbing vines can grow as long as 40 feet.",
+        "category": "624cba2376998f159c60bfad",
+        "deptCode": "01",
+        "type": "key",
+        "quantity": 0,
+        "skuSeq": 7    
+    },
+    {
+        "name": "Polka-dot Plant" ,
+        "price": 19.99,
+        "image": "../images/polka-dot.jpg",
+        "description": "Pothos is a low maintenance perennial evergreen houseplant in the Araceae (arum) family. Desired for it's glossy, green or variegated leaves on cascading stems. It only grows 6 to 8 feet as a horizontal groundcover, but the trailing, climbing vines can grow as long as 40 feet.",
+        "category": "624cba2376998f159c60bfad",
+        "deptCode": "01",
+        "type": "key",
+        "quantity": 0,
+        "skuSeq": 8
+    },
+    {
         "name": "Succulent",
         "price": 19.99,
         "image": "../images/succulent.jpg",
@@ -52,6 +96,17 @@
         "deptCode": "01",
         "type": "key",
         "quantity": 0,
-        "skuSeq": 5
+        "skuSeq": 9
+    },
+    {
+        "name": "Moss",
+        "price": 19.99,
+        "image": "../images/moss.jpg",
+        "description": "Pothos is a low maintenance perennial evergreen houseplant in the Araceae (arum) family. Desired for it's glossy, green or variegated leaves on cascading stems. It only grows 6 to 8 feet as a horizontal groundcover, but the trailing, climbing vines can grow as long as 40 feet.",
+        "category": "624cba2376998f159c60bfad",
+        "deptCode": "01",
+        "type": "key",
+        "quantity": 0,
+        "skuSeq": 10
     }
 ]

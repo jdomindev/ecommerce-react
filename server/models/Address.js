@@ -1,20 +1,20 @@
 const { Schema, model } = require("mongoose");
 
 const addressSchema = new Schema({
-    streetName: {
+    street: {
       type: String,
     },
     aptNo: {
       type: String,
-    },
-    zipCode: {
-      type: Number,
     },
     city: {
       type: String,
     },
     state: {
       type: String,
+    },
+    zipCode: {
+      type: Number,
     },
     country: {
       type: String,

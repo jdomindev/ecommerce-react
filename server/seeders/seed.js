@@ -7,8 +7,11 @@ db.once('open', async () => {
   try {
     // await User.deleteMany({});
     // await Category.deleteMany({});
+
+
     await Product.deleteMany({});
     
+
     // await Category.create(categorySeeds)
     await Product.create(getSku())
     

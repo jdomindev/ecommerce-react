@@ -9,11 +9,19 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         // context.user
-        const userFound = await User.findOne({ _id: context.user._id }).select("-__v -password").populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
+        // args
+        const userFound = await User.findOne({_id: context.user._id}).select("-__v -password").populate([
+          { 
+            path: 'address', 
+            populate: 'address' 
+          },
+          {
+            path: 'orders.products',
+            populate: 'category'
+          }
+        ])
         // _id: context.user._id
+        // _id: args._id
         userFound.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
 
         return userFound
@@ -38,8 +46,14 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
 
-    addresses: async () => {
-      return Address.find()
+    address: async (parent, args, context) => {
+      if (args) {
+        const user = await User.findById(args._id).populate('address');
+        // context.user._id
+        return user.address;
+      }
+
+      // throw new AuthenticationError('Not logged in');
     },
     
     checkout: async (parent, args, context) => {
@@ -54,7 +68,7 @@ const resolvers = {
         const product = await stripe.products.create({
           name: products[i].name,
           description: products[i].description,
-          images: [`${url}/images/${products[i].image}`]
+          images: [`${url}/images/${products[i].image}`],
         });
         
 
@@ -71,7 +85,6 @@ const resolvers = {
         });
 
       }
-
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items,
@@ -86,20 +99,6 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { email, password, firstName, lastName }) => {
-      const user = await User.create({ email, password, firstName, lastName });
-      const token = signToken(user);
-
-      return { token, user };
-    },
-
-    updateUser: async (parent, { email, password, firstName, lastName }) => {
-      const user = await User.findOneAndUpdate({ email, password, firstName, lastName });
-      const token = signToken(user);
-
-      return { token, user };
-    },
-
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -117,17 +116,52 @@ const resolvers = {
       return { token, user };
     },
 
-    createOrder: async (parent, {userId}, context) => {
-       // if (context.user) {
-      const order = await Order.create({ user: userId})
-      return order; 
-    // }
-      // throw new AuthenticationError('You need to be logged in!');
-      // { _id: context.user._id },
-      // { $push: { fandoms: args.fandomId } },
-      // { $set: { fandoms: args.fandomsArray } },
+    addUser: async (parent, { email, password, firstName, lastName }) => {
+      const user = await User.create({ email, password, firstName, lastName });
+      const token = signToken(user);
+
+      return { token, user };
     },
 
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        // context.user
+        // args
+        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+      }
+      // context.user._id
+      // args._id
+
+      throw new AuthenticationError('Not logged in');
+    },
+
+    addAddress: async (parent, args, context) => {
+      if (context.user) {
+        const address = new Address({ args });
+        await User.findByIdAndUpdate(context.user._id, { $set: { address: address } }, { new: true });
+        return address; 
+      }
+    },
+
+    updateAddress: async (parent, args, context) => {
+      if (context.user) {
+        // context.user
+        // _id, street, aptNo, city, state, zipCode, country 
+        const address = new Address( args );
+        // newAddress
+        console,log(address)
+        return await User.findByIdAndUpdate(context.user._id, 
+          { $push: 
+            { 
+              address: address
+            } 
+          }, { new: true })
+      }
+      // context.user._id
+
+      throw new AuthenticationError('Not logged in');
+    },
+    
     addOrder: async (parent, { products }, context) => {
       if (context.user) {
         const order = new Order({ products });
@@ -146,50 +180,7 @@ const resolvers = {
         const address = await Address.create({streetName, aptNo, zipCode, city, state, country})
       return address; 
     },
-
-    // addAddress
-    // adds billing and shipping address to order
-    addAddress: async (parent, {orderId, shippingAddress, billingAddress}, context) => {
-      // if (context.user) {
-        const updatedCart = await Order.findOneAndUpdate(
-              { _id: orderId },
-              { $set: { shippingAddress, billingAddress } },
-              { new: true, runValidators: true }
-          )
-      return updatedCart; 
-      // }
-      // throw new AuthenticationError('You need to be logged in!');
-      // { _id: context.user._id },
-      // { $push: { fandoms: args.fandomId } },
-      // { $set: { fandoms: args.fandomsArray } },
-    },
-
-    addProduct: async (parent, args, context) => {
-      // if (context.user) {
-        const updatedCart = await Order.findOneAndUpdate(
-              { _id: args.orderId },
-              { $push: { products: args._id } },
-              { new: true, runValidators: true }
-          ).populate('user').populate('products')
-      return updatedCart; 
-      // }
-      // throw new AuthenticationError('You need to be logged in!');
-      // { _id: context.user._id },
-      // { $push: { fandoms: args.fandomId } },
-      // { $set: { fandoms: args.fandomsArray } },
-    },
-    // addOrder: async (parent, { products }, context) => {
-    //   console.log(context);
-    //   if (context.user) {
-    //     const order = new Order({ products });
-
-    //     await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-
-    //     return order;
-    //   }
-
-    //   throw new AuthenticationError('Not logged in');
-    // },
+    
     
 
     

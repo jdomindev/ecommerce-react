@@ -1,7 +1,8 @@
 /* MAIN */
 
 :root {
-  --primary-color: #4A6094;
+  --primary-color: #405587;
+  /* --primary-color: #4A6094; */
   --secondary-color: #b3c9ff;
   --tertiary-color: #87a2e0;
   --4th-color: #baa066;
@@ -102,10 +103,10 @@ a:focus,
 /* PROFILE CLASSES */
 
 .order-image {
-  width: auto;
-  max-height: 100px;
-  min-width: 90px;
-  margin: 0 .5rem 0 0;
+  height: 100px;
+  width: 90px;
+  border-radius: 2px;
+
 }
 
 .order-card {
@@ -118,9 +119,8 @@ a:focus,
 
 @media only screen and (min-width: 1024px) {
   .order-image {
-      width: auto;
-      max-height: 200px;
-      min-width: 170px;
+      min-height: 200px;
+      min-width: 200px;
       border-radius: 2px;
   }
 
@@ -136,6 +136,6 @@ a:focus,
   }
 
   .order-items {
-    margin: 0 6rem;
+    
   }
 }

@@ -8,6 +8,7 @@ const typeDefs = gql`
     firstName: String!
     lastName: String!
     orders: [Order]
+    address: Address
   }
 
   type Order {
@@ -45,10 +46,10 @@ const typeDefs = gql`
   }
 
   type Address {
-    _id: ID!
-    streetName: String
+    _id: ID
+    street: String
     aptNo: String
-    zipCode: Int
+    zipCode: String
     city: String
     state: String
     country: String
@@ -62,27 +63,27 @@ const typeDefs = gql`
     session: ID
   }
 
-  
   type Query {
     me: User
     products: [Product]
     order(_id: ID!): Order
-    addresses: [Address]
+    address(_id: ID!): Address
     checkout(products: [ID]!): Checkout
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(email: String!, password: String!, firstName: String!, lastName: String!): Auth
-    updateUser(email: String!, password: String!, firstName: String!, lastName: String!): Auth
+    updateUser(firstName: String, lastName: String, email: String, password: String): User
+    updateAddress(street: String, aptNo: String, city: String, state: String, zipCode: String, country: String ): User
 
-    createOrder(userId: ID!): Order
     addOrder(products: [ID]!): Order
 
-    createAddress(streetName: String!, aptNo: String, zipCode: Int!, city: String!, state: String!, country: String!): Address
+    createAddress(street: String!, aptNo: String, zipCode: Int!, city: String!, state: String!, country: String!): Address
+
+
+
     addAddress(orderId: ID!, shippingAddress: [String], billingAddress: [String]): Order
-    
-    addProduct(orderId: ID!, _id: ID!): Order
 
     
   }

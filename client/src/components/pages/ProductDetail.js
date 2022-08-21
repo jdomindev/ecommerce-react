@@ -31,7 +31,7 @@ export default function ProductDetail(props) {
       {currentProduct ? (
         <>
         <div className="my-4 mx-3">
-            <Link to="/" className="back-icon "><i class="fa-solid fa-arrow-left"></i> Back to Products</Link>
+            <Link to="/" className="back-icon "><i className="fa-solid fa-arrow-left"></i> Back to Products</Link>
         </div>
         <div className="m-3">
           <div className="card product-card container p-0">

@@ -5,7 +5,6 @@ import { ADD_ORDER } from "../../utils/mutations";
 
 // import "../assets/success.css";
 
-// need to delete items from cart after order is added
 const Success = (props) => {
   const [addOrder] = useMutation(ADD_ORDER);
   const { cartItems } = props;
@@ -14,8 +13,8 @@ const Success = (props) => {
     async function saveOrder() {
       const cart = await JSON.parse(localStorage.getItem("cartItems"));
       const products = cart.map((item) => item._id);
-
-
+  
+      // Need to find a way to make sure quantities get passed on here
       if (products.length) {
         await addOrder({ variables: { products } });
         

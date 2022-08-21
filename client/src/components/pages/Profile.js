@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import spinner from "../assets/spinner.gif";
@@ -8,9 +8,11 @@ import { GET_ME } from "../../utils/queries";
 export default function Profile(props) {
   const { data, loading } = useQuery(GET_ME);
   const user = data?.me;
-
-  // function to get total price and quantity, or adjust cart
-
+  const order = user?.orders
+  const {cartItems} = props
+  console.log(cartItems)
+  // function to get quantity and total price, or adjust cart quantity
+ 
   return (
     <>
       {loading ? (
@@ -18,14 +20,39 @@ export default function Profile(props) {
           <img src={spinner} alt="loading" />
         </div>
       ) : (
-        <div className="container order-container my-1">
+        <div className="">
           {/* <Link to="/">← Back to Products</Link> */}
 
           {user ? (
             <>
+            <div className="container order-container">
               <h2 className="pt-3">
                 <strong>{user.firstName}'s Profile</strong>
               </h2>
+              <h3 className="py-3">
+                <strong>Account Details</strong>
+              </h3>
+              <aside className="border p-3 d-flex-column">
+                  <h5 ><strong>Name:</strong> {user.firstName} {user.lastName}</h5>
+                  <h5> <strong>Email:</strong> {user.email}</h5>
+                {user.address ? (
+                  <>
+                    <h5> <strong>Shipping Address:</strong></h5>
+                    <h5> {user.address.street}</h5>
+                    {(user.address.aptNo !== null) ? (
+                      <h5>Apt No. {user.address.aptNo}</h5>
+                    ) : null }
+                    <h5> {user.address.city}, {user.address.state} {user.address.zipCode}</h5>
+                    <h5> {user.address.country}</h5>
+                  </>
+                  ) : null}
+                  <hr></hr>
+                  <div className="d-flex justify-content-end">
+                  <Link to={'/profile-edit'} >
+                    <button className="btn btn-secondary ">Update Account Details</button>
+                  </Link>
+                  </div>
+              </aside>
               <h3 className="py-3">
                 <strong>Order History</strong>
               </h3>
@@ -47,7 +74,6 @@ export default function Profile(props) {
                               <div className="d-flex justify-content-between">
                                 <Link
                                   to={`/products/${_id}`}
-                                  style={{ textDecoration: "none" }}
                                 >
                                   <img
                                     alt={name}
@@ -56,16 +82,16 @@ export default function Profile(props) {
                                   />
                                 </Link>
 
-                                <div>
+                                <div className="mx-3">
                                   <h5 className="order-text">{name}</h5>
                                   <h6 className="order-text">
-                                    Price: ${price}
+                                    ${price}
                                   </h6>
                                 </div>
                               </div>
                               <div className="text-right">
-                                <h6 className="order-text">Qty: {quantity}</h6>
-                                <h6 className="order-text">${price}</h6>
+                                <h6 className="order-text">Qty:</h6>
+                                <h6 className="order-text">${price} x {quantity}</h6>
                               </div>
                             </div>
                           </div>
@@ -82,6 +108,7 @@ export default function Profile(props) {
                   </div>
                 </div>
               ))}
+              </div>
             </>
           ) : null}
         </div>

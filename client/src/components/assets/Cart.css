@@ -18,9 +18,40 @@
     border-radius: 2px;
 }
 
+.cart-quantity {
+    max-width: 3rem;
+    text-align: center;
+    border-radius: 2px;
+    border: none;
+    margin: 0;
+}
+
+.btn {
+    border-radius: 2px;
+}
+
+.cart-text {
+    width: 100px;
+}
+
+/* Removes arrows on number input on cart */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 @media only screen and (min-width: 1024px) {
     .cart-item-container {
         width: 50%;
+    }
+
+    .cart-quantity {
+        max-width: 3rem;
     }
 }

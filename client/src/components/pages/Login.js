@@ -88,7 +88,10 @@ const Login = () => {
                             Submit
                             </Button>
                         </div>
-                        <p className="text-right m-0">
+                        <p className="float-left m-0">
+                          <Link className="forgot-password" to="/signup">Create New Account</Link>
+                        </p>
+                        <p className="float-right m-0">
                           Forgot <Link className="forgot-password" to="/">password?</Link>
                         </p>
                     </Form>

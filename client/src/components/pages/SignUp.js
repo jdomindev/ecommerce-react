@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import { Form, Button, Alert, Card } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import "./../assets/SignUp.css"
@@ -125,7 +126,11 @@ const Signup = () => {
                       variant='success'>
                       Submit
                       </Button>
+                      
                   </div>
+                  <p className="text-right m-0">
+                      <Link className="forgot-password" to="/login">Login</Link>
+                  </p>
               </Form>
           </Card>
         </div>
