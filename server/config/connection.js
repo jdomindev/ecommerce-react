@@ -1,9 +1,8 @@
-require('dotenv').config()
 const mongoose = require('mongoose');
-require('dotenv').config();
+const dotenv = require('dotenv').config();
 
 mongoose.connect(
-  process.env.MONGODB_URI,
+  process.env.MONGODB_URI || 'mongodb://localhost/ecommerce-react',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

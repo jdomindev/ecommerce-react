@@ -73,25 +73,26 @@ function App() {
   };
   
   const onAddToCart = (product) => {
-
-    
-
     if(auth.loggedIn()) {
       const exist = cartItems.find((x) => x._id === product._id);
-    if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
-          x._id === product._id ? { ...exist, quantity: exist.quantity + 1 } : x
-        )
-      );
-      
-
+      if (exist) {
+        setCartItems(
+          cartItems.map((x) =>
+            x._id === product._id ? { ...exist, quantity: (exist.quantity + 1) } : x
+          )
+        );
+        successCart()
+      } else {
+        setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      }
     } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
-    }} else {
       window.location.assign("/login")
     }
   };
+
+  const successCart = () => {
+    
+  }
 
   const onRemoveFromCart = (product) => {
     const exist = cartItems.find((x) => x._id === product._id);
@@ -105,6 +106,15 @@ function App() {
       );
     }
   };
+
+  const handleChange = (e, product) => {
+    const value = e.target.value ? (parseInt(e.target.value)) : (1)
+    setCartItems(
+      cartItems.map((x) =>
+        x._id === product._id ? { ...product, quantity: value } : x
+      )
+    );
+  }
 
   const onDeleteFromCart = (product) => {
     setCartItems(cartItems.filter((x) => x._id !== product._id));
@@ -145,8 +155,10 @@ function App() {
               <Cart
                 productIds={productIds()}
                 cartItems={cartItems}
+                setCartItems={setCartItems}
                 onAddToCart={onAddToCart}
                 onRemoveFromCart={onRemoveFromCart}
+                handleChange={handleChange}
                 onDeleteFromCart={onDeleteFromCart}
               />
             </Route>

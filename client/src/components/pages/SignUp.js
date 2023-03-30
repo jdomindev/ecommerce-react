@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button, Alert, Card } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-import "./../assets/SignUp.css"
 
 import Auth from '../../utils/auth';
 import { ADD_USER } from '../../utils/mutations';
@@ -66,7 +65,6 @@ const Signup = () => {
                   <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
                   Something went wrong with your signup!
                   </Alert>
-
                   <Form.Group>
                   <Form.Label htmlFor='firstName'>First Name</Form.Label>
                   <Form.Control

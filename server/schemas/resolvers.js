@@ -64,10 +64,21 @@ const resolvers = {
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const line_items = [];
-
+      // const products = []
       const order = new Order({ products: args.products });
-
+      console.log(order)
+      console.log(args.cartItems)
       const { products } = await order.populate("products").execPopulate();
+
+      // Essentially need User.cart to be the products that are populated in Order
+
+
+      // loop through quantity array and add it to each object in productsArray
+      // for (let i = 0; i < args.quantity.length; i++) {
+      //   let quantity = args.quantity[i];
+      //   products = productsArray.map(item => item.quantity = quantity)
+      //   return { products }
+      // }
 
       for (let i = 0; i < products.length; i++) {
         const product = await stripe.products.create({

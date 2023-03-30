@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_CATEGORIES } from "../../utils/queries";
-import spinner from "../assets/spinner.gif";
+// import spinner from "../assets/spinner.gif";
 
 import "../assets/Main.css";
 import "../assets/Home.css";
@@ -11,7 +11,7 @@ import Product from "./Product";
 export default function Category(props) {
   const { products, onAddToCart } = props;
 
-  const { data, loading } = useQuery(GET_CATEGORIES);
+  const { data } = useQuery(GET_CATEGORIES);
   const categories = data?.categories || [];
   const [sortedData, setSortedData] = useState([]);
 
@@ -43,14 +43,8 @@ export default function Category(props) {
   return (
     <>
       <div>
-        {loading ? (
-          <div className="d-flex justify-content-center align-items-center mt-5">
-            <img src={spinner} alt="loading" />
-          </div>
-        ) : (
-          <>
-            <div className=" d-flex-column">
-              <div className="search-bar d-flex justify-content-center pt-3">
+            <div className="d-flex-column search-bar">
+              <div className="d-flex justify-content-center pt-3">
                 <input
                   id="search"
                   type="search"
@@ -61,16 +55,11 @@ export default function Category(props) {
                     <i className="fa-solid fa-magnifying-glass"></i>
                 </button>
               </div>
-              <div className="search-bar d-flex justify-content-center p-3">
-                <button
-                  className="btn btn-secondary m-1"
-                  value={""}
-                  onClick={handleFilteredData}
-                ><i className="fa-solid fa-x"></i></button>
+              <div className="d-flex justify-content-center p-3">
                 {categories.map((category) => {
                   return (
                     <button
-                      className="btn btn-primary m-1"
+                      className="btn btn-secondary mr-1"
                       key={category._id}
                       value={category._id}
                       onClick={handleFilteredData}
@@ -79,13 +68,22 @@ export default function Category(props) {
                     </button>
                   );
                 })}
+                { sortedData.length !== 0 ? 
+                (<button
+                  className="btn btn-secondary"
+                  value={""}
+                  onClick={handleFilteredData}
+                ><i className="fa-solid fa-x"></i>
+                </button>) 
+                : ("")
+                }
+                
               </div>
             </div>
-          </>
-        )}
       </div>
       {sortedData.length !== 0 ? (
         <>
+          <div className="container">
           <div className="product-grid m-3">
             {sortedData.map((product) => {
               return (
@@ -124,6 +122,7 @@ export default function Category(props) {
                 </div>
               );
             })}
+          </div>
           </div>
         </>
       ) : ( <Product onAddToCart={onAddToCart} /> )}

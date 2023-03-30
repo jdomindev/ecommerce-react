@@ -46,7 +46,7 @@ export default function ProductDetail(props) {
               <div className="card-padding">
                   <h2>{currentProduct.name}</h2>
                   <h5>
-                  <strong>Price: </strong> ${currentProduct.price}{" "}
+                  ${currentProduct.price}{" "}
                   </h5>
                   <p>{currentProduct.description}</p>
                   <button

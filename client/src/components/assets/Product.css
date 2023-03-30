@@ -1,8 +1,12 @@
 
+#product {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr) );
-    grid-gap: 1.5rem;
+    grid-gap: 2rem;
 }
 
 .card-padding {
