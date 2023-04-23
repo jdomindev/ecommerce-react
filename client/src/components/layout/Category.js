@@ -88,38 +88,41 @@ export default function Category(props) {
             {sortedData.map((product) => {
               return (
                 <div key={product._id} id="product">
-                  <div className="product-card">
-                    <Link to={`/products/${product._id}`}>
-                      <img
-                        className="card-img"
-                        src={product.image}
-                        alt={product.name}
-                      />
-                    </Link>
+                <div className="product-card">
+                  <Link to={`/products/${product._id}`}>
+                    <img
+                      className="card-img"
+                      src={product.image}
+                      alt={product.name}
+                    />
+                  </Link>
+                  <div className="card-move">
                     <div className="card-padding">
-                      <h2 className="card-title">{product.name}</h2>
+                      <h2 className="card-title"><strong>{product.name}</strong></h2>
                       <h5>
-                        <strong>Price: </strong>${product.price}
+                        ${product.price}
                       </h5>
                       <details>
                         <summary>Description</summary>
                         <p className="card-text pt-2">{product.description}</p>
                       </details>
                     </div>
-                    <div className="d-flex justify-content-end card-padding pt-0">
-                      <button className="btn btn-secondary mr-1">
-                        Add to Wishlist
-                      </button>
-                      <button
-                        onClick={() => onAddToCart(product)}
-                        className="btn btn-primary"
-                      >
-                        Add to Cart{" "}
-                        <i className="fa-solid fa-cart-shopping"></i>
-                      </button>
-                    </div>
+                  </div>
+                  <div className="d-flex justify-content-end card-padding pt-0">
+                    <button className="btn btn-secondary mr-1">
+                      <i className="fa-solid fa-heart"></i>
+                    </button>
+                    <button
+                      onClick={() => onAddToCart(product)}
+                      className="btn cart-button"
+                      
+                    >
+                      Add to Cart <i className="fa-solid fa-cart-shopping"></i>
+                    </button>
+                   
                   </div>
                 </div>
+              </div>
               );
             })}
           </div>

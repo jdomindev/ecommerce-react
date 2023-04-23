@@ -30,7 +30,7 @@ export default function Product(props) {
                     <img
                       className="card-img"
                       src={product.image}
-                      alt="product"
+                      alt={product.name}
                     />
                   </Link>
                   <div className="card-move">

@@ -127,8 +127,8 @@ a:focus,
 
 @media only screen and (min-width: 1024px) {
   .order-image {
-      min-height: 200px;
-      min-width: 200px;
+      min-height: 150px;
+      min-width: 140px;
       border-radius: 2px;
   }
 
