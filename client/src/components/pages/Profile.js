@@ -6,15 +6,12 @@ import "../assets/Profile.css"
 
 import { GET_ME } from "../../utils/queries";
 
-export default function Profile(props) {
+export default function Profile() {
   const { data, loading } = useQuery(GET_ME);
   const user = data?.me;
   const order = user?.orders;
-  const {cartItems} = props
-  console.log(order);
-  // Need to be able to see ordered products and a correct total price
-  // function to get quantity and total price, or adjust cart quantity
- 
+  const prices = order?.map(order => (order.products.map(product => product.price)))
+
   return (
     <>
       {loading ? (
@@ -53,7 +50,7 @@ export default function Profile(props) {
               <h3 className="py-3 m-0 profile-header">
                 <strong>Order History</strong>
               </h3>
-              {order.map((order) => (
+              {order.map((order, index) => (
                 <div key={order._id} className="card order-item mb-4">
                   <div className="">
                     <h4 className="float-left order-text-title">Order Summary</h4>
@@ -65,7 +62,7 @@ export default function Profile(props) {
                     <hr></hr>
                     <div className="order-items">
                       {order.products.map(
-                        ({ _id, image, name, price, quantity }, index) => (
+                        ({ _id, image, name, price }, index) => (
                           <div key={index} className="order-card">
                             <div className="d-flex justify-content-between">
                               <div className="d-flex justify-content-between">
@@ -81,14 +78,15 @@ export default function Profile(props) {
 
                                 <div className="mx-3">
                                   <h5 className="order-text">{name}</h5>
-                                  <h6 className="order-text">
-                                    ${price}
-                                  </h6>
+                                  
                                 </div>
                               </div>
                               <div className="text-right">
-                                <h6 className="order-text">Qty:</h6>
-                                <h6 className="order-text">${price} x {quantity}</h6>
+                                <h6 className="order-text">
+                                    ${price}
+                                  </h6>
+                                {/* <h6 className="order-text">Qty:</h6> */}
+                                {/* <h6 className="order-text">${price} x {quantity}</h6> */}
                               </div>
                             </div>
                           </div>
@@ -98,7 +96,9 @@ export default function Profile(props) {
                       <div className="">
                         <div className="d-flex justify-content-between">
                           <h5 className="">Total Price</h5>
-                          <h5 className="">$300</h5>
+                          <h5 className="">${
+                          prices[index].reduce((a, b) => a + b, 0).toFixed(2)
+                          }</h5>
                         </div>
                       </div>
                     </div>
