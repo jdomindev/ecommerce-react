@@ -46,9 +46,9 @@ export default function Product(props) {
                     </div>
                   </div>
                   <div className="d-flex justify-content-end card-padding pt-0">
-                    <button className="btn btn-secondary mr-1">
+                    {/* <button className="btn btn-secondary mr-1">
                       <i className="fa-solid fa-heart"></i>
-                    </button>
+                    </button> */}
                     <button
                       onClick={() => onAddToCart(product)}
                       className="btn cart-button"
