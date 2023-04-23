@@ -25,7 +25,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  cart: [Product.schema],
   orders: [Order.schema],
   address: Address.schema
 },
