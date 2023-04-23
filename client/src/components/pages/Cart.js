@@ -25,7 +25,7 @@ export default function Cart(props) {
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0);
   const taxPrice = itemsPrice * 0.06;
   const shippingPrice = itemsPrice > 50 ? 0 : 12;
-  const totalPrice = itemsPrice + taxPrice + shippingPrice;
+  const totalPrice = itemsPrice + shippingPrice;
 
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
@@ -122,6 +122,7 @@ export default function Cart(props) {
                   <h6 className="order-text">Shipping & handling</h6>
                   <h6 className="order-text">${shippingPrice.toFixed(2)}</h6>
                 </div>
+                <p className="font-italic">Free shipping on purchases over $50</p>
                 <hr></hr>
                 <div className="d-flex font-weight-bold justify-content-between pt-1">
                   <h6 className="order-text">
