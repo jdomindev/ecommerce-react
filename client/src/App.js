@@ -60,10 +60,10 @@ function App() {
 
   const productIds = () => {
     let productIds = [];
-    const quantities = [];
+    // const quantities = [];
 
     cartItems.forEach((item) => {
-      quantities.push(item.quantity)
+      // quantities.push(item.quantity)
       for (let i = 0; i < item.quantity; i++) {
         productIds.push(item._id);
       }
@@ -73,8 +73,10 @@ function App() {
   };
   
   const onAddToCart = (product) => {
+    
     if(auth.loggedIn()) {
       const exist = cartItems.find((x) => x._id === product._id);
+      // If user is logged in, if item already exist in user cart, add 1 to its quantity
       if (exist) {
         setCartItems(
           cartItems.map((x) =>
@@ -82,7 +84,9 @@ function App() {
           )
         );
         successCart()
-      } else {
+      } 
+      // other wise set quantity to 1
+      else {
         setCartItems([...cartItems, { ...product, quantity: 1 }]);
       }
     } else {

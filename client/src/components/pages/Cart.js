@@ -28,9 +28,7 @@ export default function Cart(props) {
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
 
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
-  const quantity = cartItems.map(item => item.quantity)
 
-console.log(quantity);
   useEffect(() => {
     if (data) {
       stripePromise.then((res) => {
@@ -45,21 +43,7 @@ console.log(quantity);
     });
   };
 
-  // useEffect(() => {
-  //   let argsQuantity = [2, 3, 4, 5]
-  //   let products = []
-  //     let quantity = argsQuantity[i];
-  //     // setCartItems((prev) => ({...prev, quantity: quantity}))
-  //     // products = 
-  //     const cartItemsWithQuantity = cartItems.map(item => ({ ...item, quantity:  }));
-  //     // think you need to spread object
-  //   console.log(cartItemsWithQuantity);
-
-  //   console.log(products);
     console.log(cartItems);
-  // }, [cartItems]);
- 
-
 
   return (
     <>
