@@ -7,7 +7,6 @@ const typeDefs = gql`
     password: String!
     firstName: String!
     lastName: String!
-    cart: [Product]
     orders: [Order]
     address: Address
   }
