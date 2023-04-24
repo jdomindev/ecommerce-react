@@ -1,7 +1,6 @@
 .search-bar {
     background-color: var(--tertiary-color);
     color: var(--off-white-color);
-    border-color: var(--off-white-color);
     padding: 0 1rem 0 1rem;
 }
 
@@ -15,21 +14,20 @@
 
 #search:focus {
     outline: var(--4th-color) 1.75px solid;
-
 }
 
 .search-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
     background-color: var(--4th-color);
     border-radius: 0px 5px 5px 0px;
-    border: var(--4th-color) 2px solid;
+    padding: 1rem;
+    border: 1px solid var(--4th-color);
 }
 
 @media only screen and (min-width: 1024px) {
     #search {
-        width: 40%;
+        width: 50%;
     }
 }

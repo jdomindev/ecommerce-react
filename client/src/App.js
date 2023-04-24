@@ -60,10 +60,10 @@ function App() {
 
   const productIds = () => {
     let productIds = [];
-    const quantities = [];
+    // const quantities = [];
 
     cartItems.forEach((item) => {
-      quantities.push(item.quantity)
+      // quantities.push(item.quantity)
       for (let i = 0; i < item.quantity; i++) {
         productIds.push(item._id);
       }
@@ -73,25 +73,30 @@ function App() {
   };
   
   const onAddToCart = (product) => {
-
     
-
     if(auth.loggedIn()) {
       const exist = cartItems.find((x) => x._id === product._id);
-    if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
-          x._id === product._id ? { ...exist, quantity: exist.quantity + 1 } : x
-        )
-      );
-      
-
+      // If user is logged in, if item already exist in user cart, add 1 to its quantity
+      if (exist) {
+        setCartItems(
+          cartItems.map((x) =>
+            x._id === product._id ? { ...exist, quantity: (exist.quantity + 1) } : x
+          )
+        );
+        successCart()
+      } 
+      // other wise set quantity to 1
+      else {
+        setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      }
     } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
-    }} else {
       window.location.assign("/login")
     }
   };
+
+  const successCart = () => {
+    
+  }
 
   const onRemoveFromCart = (product) => {
     const exist = cartItems.find((x) => x._id === product._id);
@@ -105,6 +110,15 @@ function App() {
       );
     }
   };
+
+  const handleChange = (e, product) => {
+    const value = e.target.value ? (parseInt(e.target.value)) : (1)
+    setCartItems(
+      cartItems.map((x) =>
+        x._id === product._id ? { ...product, quantity: value } : x
+      )
+    );
+  }
 
   const onDeleteFromCart = (product) => {
     setCartItems(cartItems.filter((x) => x._id !== product._id));
@@ -145,8 +159,10 @@ function App() {
               <Cart
                 productIds={productIds()}
                 cartItems={cartItems}
+                setCartItems={setCartItems}
                 onAddToCart={onAddToCart}
                 onRemoveFromCart={onRemoveFromCart}
+                handleChange={handleChange}
                 onDeleteFromCart={onDeleteFromCart}
               />
             </Route>

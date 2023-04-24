@@ -5,50 +5,43 @@ import { useMutation } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import spinner from "../assets/spinner.gif";
 
-import Auth from "../../utils/auth";
+// import Auth from "../../utils/auth";
 
 import { GET_ME } from "../../utils/queries";
 import { UPDATE_USER } from "../../utils/mutations";
-import { UPDATE_ADDRESS } from "../../utils/mutations";
+// import { UPDATE_ADDRESS } from "../../utils/mutations";
 
-export default function ProfileEdit(props) {
+export default function ProfileEdit() {
   const { data, loading } = useQuery(GET_ME);
   const user = data?.me;
-  const address = user?.address || {}
+  // const address = user?.address || {}
 
-// Need to work on updating user address, works in backend and returns address
-// Somehow have it show not undefined client side
-// UPDATE: updateUSER works updateADDRESS reaches the try catch block client side and fails
-// go back to graphql and mess around again... idk
+  // Need to work on updating user address, works in backend and returns address
+  // Somehow have it show not undefined client side
+  // UPDATE: updateUSER works updateADDRESS reaches the try catch block client side and fails
+  // go back to graphql and mess around again... idk
 
   // const newAddress = async() => await user.address || {}
   const [userUpdatedData, setUserUpdatedData] = useState({ user });
-  const [userUpdatedAddress, setUserUpdatedAddress] = useState( { address } ) ;
-  
-  console.log(userUpdatedData)
-  console.log(userUpdatedAddress)
+  // const [userUpdatedAddress, setUserUpdatedAddress] = useState( { address } ) ;
 
   const [updateUser] = useMutation(UPDATE_USER);
-  const [updateAddress] = useMutation(UPDATE_ADDRESS);
+  // const [updateAddress] = useMutation(UPDATE_ADDRESS);
 
   // set state for form validation
   const [validated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
-  const [validated2] = useState(false);
-  // set state for alert
-  const [showAlert2, setShowAlert2] = useState(false);
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserUpdatedData({ ...userUpdatedData, [name]: value });
   };
 
-  const handleAddressChange = (event) => {
-    const { name, value } = event.target;
-    setUserUpdatedAddress({ ...userUpdatedAddress, [name]: value });
-  };
+  // const handleAddressChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setUserUpdatedAddress({ ...userUpdatedAddress, [name]: value });
+  // };
 
   const handleUserUpdate = async (event) => {
     event.preventDefault();
@@ -61,16 +54,14 @@ export default function ProfileEdit(props) {
     }
 
     try {
-      const { data } = await updateUser({
+      await updateUser({
         variables: { ...userUpdatedData },
       });
-      
 
       setTimeout(() => {
         window.location.assign("/profile");
       }, 1000);
 
-      // Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -82,38 +73,38 @@ export default function ProfileEdit(props) {
     // });
   };
 
-  const handleAddressUpdate = async (event) => {
-    event.preventDefault();
+  // const handleAddressUpdate = async (event) => {
+  //   event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    
-    try {
-      const { data } = await updateAddress({
-        variables: { ...userUpdatedAddress },
-      });
+  //   // check if form has everything (as per react-bootstrap docs)
+  //   const form = event.currentTarget;
+  //   if (form.checkValidity() === false) {
+  //     event.preventDefault();
+  //     event.stopPropagation();
+  //   }
 
-      console.log('im here')
+  //   try {
+  //     const { data } = await updateAddress({
+  //       variables: { ...userUpdatedAddress },
+  //     });
 
-      setTimeout(() => {
-        window.location.assign("/profile");
-      }, 1000);
+  //     console.log('im here')
 
-      // Auth.login(data.addUser.token);
-    } catch (err) {
-      console.error(err);
-      setShowAlert2(true);
-    }
+  //     setTimeout(() => {
+  //       window.location.assign("/profile");
+  //     }, 1000);
 
-    // setUserFormData({
-    //   email: '',
-    //   password: '',
-    // });
-  };
+  //     // Auth.login(data.addUser.token);
+  //   } catch (err) {
+  //     console.error(err);
+  //     setShowAlert2(true);
+  //   }
+
+  //   // setUserFormData({
+  //   //   email: '',
+  //   //   password: '',
+  //   // });
+  // };
 
   return (
     <>
@@ -127,7 +118,7 @@ export default function ProfileEdit(props) {
             <Card className="login-card">
               <div className="">
                 <h2>Account Details</h2>
-                <p>Update all the entries you would like to change</p>
+                <p>Update any of the entries you would like to change and apply changes</p>
                 <h4>Basic Info</h4>
               </div>
               {/* This is needed for the validation functionality above */}
@@ -153,7 +144,6 @@ export default function ProfileEdit(props) {
                     placeholder={user.firstName}
                     name="firstName"
                     onChange={handleInputChange}
-                    value={userUpdatedData.firstName}
                   />
                 </Form.Group>
                 <Form.Group>
@@ -163,7 +153,6 @@ export default function ProfileEdit(props) {
                     placeholder={user.lastName}
                     name="lastName"
                     onChange={handleInputChange}
-                    value={userUpdatedData.lastName}
                   />
                 </Form.Group>
                 <Form.Group>
@@ -173,7 +162,6 @@ export default function ProfileEdit(props) {
                     placeholder={user.email}
                     name="email"
                     onChange={handleInputChange}
-                    value={userUpdatedData.email}
                   />
                 </Form.Group>
                 <Form.Group>
@@ -183,7 +171,6 @@ export default function ProfileEdit(props) {
                     placeholder="Your new password"
                     name="password"
                     onChange={handleInputChange}
-                    value={userUpdatedData.password}
                   />
                 </Form.Group>
                 <div className="d-flex justify-content-center">
@@ -200,18 +187,17 @@ export default function ProfileEdit(props) {
                     type="submit"
                     variant="success"
                   >
-                    Submit
+                    Apply Changes
                   </Button>
                 </div>
               </Form>
-              <hr></hr>
+              {/* <hr></hr> */}
 
-              <Form
+              {/* <Form
                 noValidate
                 validated={validated2}
                 onSubmit={handleAddressUpdate}
               >
-                {/* show alert if server response is bad */}
                 <Alert
                   dismissible
                   onClose={() => setShowAlert2(false)}
@@ -299,7 +285,7 @@ export default function ProfileEdit(props) {
                     Submit
                   </Button>
                 </div>
-              </Form>
+              </Form> */}
             </Card>
           </div>
         </div>

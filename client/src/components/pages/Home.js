@@ -21,17 +21,9 @@ export default function Home(props) {
   return (
     <>
       {/* <Carousel /> */}
-      {/* // <select className="float-right" defaultValue={'DEFAULT'}>
-          //     <option value="DEFAULT">Select an Option</option>
-          //   {categories.map((category) => { return (
-          //       <option key={category._id} value={category.name}>{category.name}</option>
-          //     )}
-          //   )}
-          // </select> */}
-      <Category products={products} />
-      
-      <div>
-          <>
+      <Category products={products} onAddToCart={onAddToCart}/>
+      {/* <div>
+          <div className="container">
             <div className="product-grid m-3">
               {filteredData.map((product) => {
                 return (
@@ -47,10 +39,9 @@ export default function Home(props) {
                     <div className="card-padding">
                       <h2 className="card-title">{product.name}</h2>
                       <h5>
-                        <strong>Price: </strong>
+                        Price:
                         ${product.price}
                       </h5>
-                      {/* <p className="card-text">{product.description}</p> */}
                     </div>
                     <div className="d-flex justify-content-end card-padding pt-0">
                       <button className="btn btn-secondary mr-1">
@@ -68,11 +59,8 @@ export default function Home(props) {
               );
               })}
             </div>
-          </>
-        {/* // : (
-        // <Product onAddToCart={onAddToCart} />
-        // )} */}
-      </div>
+          </div>
+      </div> */}
 
     </>
   )

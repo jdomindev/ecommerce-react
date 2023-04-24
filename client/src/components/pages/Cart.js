@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Button } from 'react-bootstrap';
 import { loadStripe } from "@stripe/stripe-js";
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_CHECKOUT } from "../../utils/queries";
@@ -17,18 +18,16 @@ export default function Cart(props) {
     cartItems,
     productIds,
     onDeleteFromCart,
+    setCartItems,
+    handleChange
   } = props;
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0);
-  // console.log(cartItems);
   const taxPrice = itemsPrice * 0.06;
   const shippingPrice = itemsPrice > 50 ? 0 : 12;
-  const totalPrice = itemsPrice + taxPrice + shippingPrice;
-  // const itemPrice = cartItems.forEach(item) => a + c.price * c.quantity, 0
+  const totalPrice = itemsPrice + shippingPrice;
 
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
-  // const quantity = cartItems.map(item => item.quantity)
-
 
   useEffect(() => {
     if (data) {
@@ -44,56 +43,58 @@ export default function Cart(props) {
     });
   };
 
+    console.log(cartItems);
+
   return (
     <>
       {cartItems.length ? (
-        <div className="container cart-item-container">
-          <h2 className="py-3">
-            <strong>Your Cart</strong>
-          </h2>
+        <div className="container mt-3">
           {cartItems.map((item) => (
             <div
               key={item._id}
-              className="cart-item d-flex align-items-center justify-content-between my-1"
+              className="cart-item d-flex align-items-center justify-content-between my-3"
             >
-              <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center flex-wrap w-50">
                 <Link to={`/products/${item._id}`}>
                   <img
                     src={item.image}
-                    className="order-image"
+                    className="order-image mr-3"
                     alt="cart item"
                   />
                 </Link>
-                <div className="d-flex-column cart-text ml-3">
+                <div className="d-flex-column cart-text mt-3">
                   <h6 className="order-text">{item.name}</h6>
-                  <h6 className="order-text">${item.price}</h6>
+                  <h6>${item.price}</h6>
                 </div>
               </div>
 
-              <div className="d-flex-column text-center m-1">
+              <div className="d-flex-column text-center mx-3">
                 <button
                   onClick={() => onAddToCart(item)}
-                  className="btn btn-secondary py-0"
+                  className="btn btn-secondary"
                 >
-                  <i className="fa-solid fa-plus px-1 "></i>
+                  <i className="fa-solid fa-plus px-1"></i>
                 </button>
                 <div>
-                <input
-                  type="number"
-                  min="0"
-                  className="cart-quantity"
-                  placeholder={item.quantity}
-                  value={item.quantity}
-                ></input>
+                  <input
+                    type="number"
+                    min="1"
+                    className="cart-quantity"
+                    value={item.quantity}
+                    onChange={(e) => handleChange(e, item)}
+                  ></input>
                 </div>
                 <button
                   onClick={() => onRemoveFromCart(item)}
-                  className="btn btn-secondary py-0"
+                  className="btn btn-secondary"
                 >
                   <i className="fa-solid fa-minus px-1"></i>
                 </button>
               </div>
-              <div>
+              <div className="text-center mx-3">
+                <h6>${(item.quantity * item.price).toFixed(2)}</h6>
+              </div>
+              <div className="mx-3">
                 <button
                   onClick={() => onDeleteFromCart(item)}
                   className="btn btn-danger"
@@ -104,9 +105,8 @@ export default function Cart(props) {
             </div>
           ))}
 
-          <hr></hr>
-          <div className="d-flex justify-content-center">
-            <div className="w-100">
+          <div className="d-flex justify-content-center mt-5">
+            <div className="w-100 mb-3">
               <div className="cart-item">
                 <div className="d-flex justify-content-between pb-1">
                   <h6 className="order-text">
@@ -114,27 +114,30 @@ export default function Cart(props) {
                   </h6>
                   <h6 className="order-text">${itemsPrice.toFixed(2)}</h6>
                 </div>
-                <div className="d-flex justify-content-between pb-1">
+                {/* <div className="d-flex justify-content-between pb-1">
                   <h6 className="order-text">Taxes</h6>
-                  <h6 className="order-text">${taxPrice.toFixed(2)}</h6>
-                </div>
+                  <h6 className="order-text">Incl. in Stripe</h6>
+                </div> */}
                 <div className="d-flex justify-content-between pb-1">
                   <h6 className="order-text">Shipping & handling</h6>
                   <h6 className="order-text">${shippingPrice.toFixed(2)}</h6>
                 </div>
-              </div>
-              <div className="cart-item">
+                <p className="font-italic">Free shipping on purchases over $50</p>
+                <hr></hr>
                 <div className="d-flex font-weight-bold justify-content-between pt-1">
                   <h6 className="order-text">
                     <strong>Total Price</strong>
                   </h6>
                   <h6 className="order-text">${totalPrice.toFixed(2)}</h6>
                 </div>
-              </div>
-              <div className="text-right button-margin ">
-                <button className="btn btn-success" onClick={submitCheckout}>
+                <div className="text-right">
+                  <Button
+                  onClick={submitCheckout}
+                  className='btn-custom'
+                  type='submit'>
                   Checkout
-                </button>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

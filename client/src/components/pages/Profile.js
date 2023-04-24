@@ -2,19 +2,16 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import spinner from "../assets/spinner.gif";
+import "../assets/Profile.css"
 
 import { GET_ME } from "../../utils/queries";
 
-export default function Profile(props) {
+export default function Profile() {
   const { data, loading } = useQuery(GET_ME);
   const user = data?.me;
-  const order = user?.orders
-  const {cartItems} = props
-  console.log(cartItems)
+  const order = user?.orders;
+  const prices = order?.map(order => (order.products.map(product => product.price)))
 
-  // Need to be able to see ordered products and a correct total price
-  // function to get quantity and total price, or adjust cart quantity
- 
   return (
     <>
       {loading ? (
@@ -23,21 +20,16 @@ export default function Profile(props) {
         </div>
       ) : (
         <div className="">
-          {/* <Link to="/">← Back to Products</Link> */}
-
           {user ? (
             <>
-            <div className="container order-container">
-              <h2 className="pt-3 m-0">
-                <strong>{user.firstName}'s Profile</strong>
-              </h2>
-              <h3 className="py-3 m-0">
-                <strong>Account Details</strong>
-              </h3>
-              <aside className="border p-3 d-flex-column">
-                  <h5 ><strong>Name:</strong> {user.firstName} {user.lastName}</h5>
-                  <h5> <strong>Email:</strong> {user.email}</h5>
-                {user.address ? (
+            <div className="container">
+              <aside className="order-item p-3 mt-3 d-flex-column">
+                  <h2 className="pb-3 profile-header">
+                    <strong>{user.firstName}'s Profile</strong>
+                  </h2>
+                  <h5>Name: {user.firstName} {user.lastName}</h5>
+                  <h5>Email: {user.email}</h5>
+                {/* {user.address ? (
                   <>
                     <h5> <strong>Shipping Address:</strong></h5>
                     <h5> {user.address.street}</h5>
@@ -47,7 +39,7 @@ export default function Profile(props) {
                     <h5> {user.address.city}, {user.address.state} {user.address.zipCode}</h5>
                     <h5> {user.address.country}</h5>
                   </>
-                  ) : null}
+                  ) : null} */}
                   <hr></hr>
                   <div className="d-flex justify-content-end">
                   <Link to={'/profile-edit'} >
@@ -55,10 +47,10 @@ export default function Profile(props) {
                   </Link>
                   </div>
               </aside>
-              <h3 className="py-3 m-0">
+              <h3 className="py-3 m-0 profile-header">
                 <strong>Order History</strong>
               </h3>
-              {user.orders.map((order) => (
+              {order.map((order, index) => (
                 <div key={order._id} className="card order-item mb-4">
                   <div className="">
                     <h4 className="float-left order-text-title">Order Summary</h4>
@@ -70,7 +62,7 @@ export default function Profile(props) {
                     <hr></hr>
                     <div className="order-items">
                       {order.products.map(
-                        ({ _id, image, name, price, quantity }, index) => (
+                        ({ _id, image, name, price }, index) => (
                           <div key={index} className="order-card">
                             <div className="d-flex justify-content-between">
                               <div className="d-flex justify-content-between">
@@ -86,14 +78,15 @@ export default function Profile(props) {
 
                                 <div className="mx-3">
                                   <h5 className="order-text">{name}</h5>
-                                  <h6 className="order-text">
-                                    ${price}
-                                  </h6>
+                                  
                                 </div>
                               </div>
                               <div className="text-right">
-                                <h6 className="order-text">Qty:</h6>
-                                <h6 className="order-text">${price} x {quantity}</h6>
+                                <h6 className="order-text">
+                                    ${price}
+                                  </h6>
+                                {/* <h6 className="order-text">Qty:</h6> */}
+                                {/* <h6 className="order-text">${price} x {quantity}</h6> */}
                               </div>
                             </div>
                           </div>
@@ -103,7 +96,9 @@ export default function Profile(props) {
                       <div className="">
                         <div className="d-flex justify-content-between">
                           <h5 className="">Total Price</h5>
-                          <h5 className="">$300</h5>
+                          <h5 className="">${
+                          prices[index].reduce((a, b) => a + b, 0).toFixed(2)
+                          }</h5>
                         </div>
                       </div>
                     </div>

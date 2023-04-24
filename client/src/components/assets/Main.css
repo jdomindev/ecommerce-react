@@ -1,13 +1,21 @@
 /* MAIN */
 
 :root {
-  --primary-color: #405587;
-  /* --primary-color: #4A6094; */
+  /* --primary-color: #405587;
   --secondary-color: #b3c9ff;
-  --tertiary-color: #87a2e0;
-  --4th-color: #baa066;
-  --5th-color: #e0c687;
-  --off-white-color: #e6f0ef;
+  --tertiary-color: #87a2e0; */
+  /* --primary-color: #33658A;
+  --secondary-color: #86BBD8;
+  --tertiary-color: #758E4F;
+  --4th-color: #F26419; 
+  --5th-color: #F6AE2D; */
+  --primary-color: #33658A;
+  --tertiary-color: #698d88;
+  --secondary-color:  #72776b;
+   /* accent */
+  --4th-color: #7BB2D9; 
+  --5th-color: #BFD2BF;
+  --off-white-color: #fdfdfd;
   --shadow-color: rgba(0, 5, 17, 0.5);
   --background-color: rgb(120, 120, 120);
 }
@@ -36,7 +44,7 @@ a {
 }
 
 body {
-  background-color: var(--secondary-color); 
+  background-color: var(--background-color); 
   font-family: 'Lato', sans-serif;
 
 }
@@ -119,8 +127,8 @@ a:focus,
 
 @media only screen and (min-width: 1024px) {
   .order-image {
-      min-height: 200px;
-      min-width: 200px;
+      min-height: 150px;
+      min-width: 140px;
       border-radius: 2px;
   }
 

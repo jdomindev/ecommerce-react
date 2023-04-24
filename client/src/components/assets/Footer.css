@@ -21,7 +21,7 @@
 }
 
 .icon:link, .icon:visited {
-  color: var(--4th-color);
+  color: var(--5th-color);
   text-decoration: none;
 }
   
@@ -32,7 +32,7 @@
   } */
   
   .icon:hover {
-    color: var(--5th-color);
+    color: var(--4th-color);
     text-decoration: none;
   }
   
@@ -48,7 +48,7 @@
 
   .icons {
     padding-top: 1rem;
-    color: var(--4th-color);
+    color: var(--5th-color);
   }
 
  

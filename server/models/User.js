@@ -2,6 +2,7 @@ const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const Order = require('./Order');
 const Address = require('./Address');
+const Product = require('./Product');
 
 
 const userSchema = new Schema({

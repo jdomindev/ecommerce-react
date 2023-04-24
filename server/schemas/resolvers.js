@@ -13,10 +13,6 @@ const resolvers = {
           .select("-__v -password")
           .populate([
             {
-              path: "address",
-              populate: "address",
-            },
-            {
               path: "orders.products",
               populate: "category",
             },
@@ -64,10 +60,16 @@ const resolvers = {
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const line_items = [];
+      
+      // If user logged in, add cart to user's orders
+      if (context.user) {
+        const order = new Order({ products: args.products });
 
-      const order = new Order({ products: args.products });
-
-      const { products } = await order.populate("products").execPopulate();
+        await User.findByIdAndUpdate(context.user._id, {
+          $push: { orders: order },
+        });
+      
+        const { products } = await order.populate("products").execPopulate();
 
       for (let i = 0; i < products.length; i++) {
         const product = await stripe.products.create({
@@ -87,6 +89,7 @@ const resolvers = {
           quantity: 1,
         });
       }
+
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items,
@@ -96,6 +99,8 @@ const resolvers = {
       });
 
       return { session: session.id };
+    }
+    throw new AuthenticationError("Not logged in");
     },
   },
 
@@ -156,7 +161,6 @@ const resolvers = {
         // _id, street, aptNo, city, state, zipCode, country
         const address = new Address(args);
         // newAddress
-        console, log(address);
         return await User.findByIdAndUpdate(
           context.user._id,
           {
@@ -168,20 +172,6 @@ const resolvers = {
         );
       }
       // context.user._id
-
-      throw new AuthenticationError("Not logged in");
-    },
-
-    addOrder: async (parent, { products }, context) => {
-      if (context.user) {
-        const order = new Order({ products });
-
-        await User.findByIdAndUpdate(context.user._id, {
-          $push: { orders: order },
-        });
-
-        return order;
-      }
 
       throw new AuthenticationError("Not logged in");
     },
@@ -205,30 +195,3 @@ const resolvers = {
 };
 
 module.exports = resolvers;
-
-// GOOD
-
-// queries
-
-// addUser
-// login
-// createOrder (new Order)
-// addOrder (adds Order to User's orders)
-// createAddress (new Address)
-// addProduct (to Order)
-// addAddress (Addresses to Order)
-
-// NEED
-
-// editUser (email, password, firstName, lastName)
-// editAddress (shipping and billing)
-
-// User Process
-
-// signup
-// login
-// look at products OR look at profile
-// add product to cart (addProduct)
-// save for later? wishlist vs cart?
-// checkout product ()
-// buy product
