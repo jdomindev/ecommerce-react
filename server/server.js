@@ -22,7 +22,7 @@ const server = new ApolloServer({
 server.applyMiddleware({ app });
 
 // Set up a whitelist and check against it:
-var whitelist = ['https://ecommerce-react-backend.onrender.com', 'https://ecommerce-react-acyw.onrender.com/graphql']
+var whitelist = ['https://ecommerce-react-backend.onrender.com', 'https://ecommerce-react-backend.onrender.com/graphql']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
