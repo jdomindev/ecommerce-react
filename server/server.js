@@ -1,7 +1,7 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
-
+const cors = require('cors');
 
 const { typeDefs, resolvers } = require('./schemas');
 // Import `authMiddleware()` function to be configured with the Apollo Server
@@ -21,6 +21,20 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
+// Set up a whitelist and check against it:
+var whitelist = ['https://ecommerce-react-backend.onrender.com', 'https://ecommerce-react-backend.onrender.com/graphql']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+// Then pass them to cors:
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
