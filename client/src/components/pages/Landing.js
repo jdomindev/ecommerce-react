@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./../assets/Landing.css";
 import SmoothScroll from "smooth-scroll";
 import logo from "../images/leaf.svg";
 

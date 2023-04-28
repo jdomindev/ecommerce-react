@@ -29,8 +29,8 @@ import Footer from "./components/layout/Footer";
 // CHANGE BACK AFTER DEPLOYMENT?
 
 const httpLink = createHttpLink({
-  // uri: "/graphql",
-  uri: "http://localhost:3001/graphql",
+  uri: "https://ecommerce-react-backend.onrender.com/graphql",
+  // uri: "http://localhost:3001/graphql",
 });
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header

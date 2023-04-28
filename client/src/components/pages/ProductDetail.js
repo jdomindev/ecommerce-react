@@ -38,7 +38,7 @@ export default function ProductDetail(props) {
             <div className="flex">
               <div>
                 <img
-                  src={`/images/${currentProduct.image}`}
+                  src={currentProduct.image}
                   alt={currentProduct.name}
                   className="card-img"
                 />
@@ -50,7 +50,7 @@ export default function ProductDetail(props) {
                   </h5>
                   <p>{currentProduct.description}</p>
                   <button
-                    className="btn btn-primary"
+                    className="btn cart-button float-right"
                     onClick={() => onAddToCart(currentProduct)}
                   >
                     Add to Cart
