@@ -24,8 +24,6 @@ server.applyMiddleware({ app });
 var whitelist = [
   "https://ecommerce-react-backend.onrender.com",
   "https://ecommerce-react-backend.onrender.com/graphql",
-  "https://ecommerce-react-acyw.onrender.com",
-  "https://ecommerce-react-acyw.onrender.com/graphql",
 ];
 
 var corsOptions = {
@@ -39,7 +37,7 @@ var corsOptions = {
 };
 
 // Then pass them to cors:
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
