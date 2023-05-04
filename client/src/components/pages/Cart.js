@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import { loadStripe } from "@stripe/stripe-js";
@@ -28,6 +28,8 @@ export default function Cart(props) {
   const totalPrice = itemsPrice + shippingPrice;
 
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+  
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (data) {
@@ -38,12 +40,11 @@ export default function Cart(props) {
   }, [data]);
 
   const submitCheckout = () => {
+    setLoading(true)
     getCheckout({
       variables: { products: productIds },
     });
   };
-
-    console.log(cartItems);
 
   return (
     <>
@@ -135,7 +136,8 @@ export default function Cart(props) {
                   onClick={submitCheckout}
                   className='btn-custom'
                   type='submit'>
-                  Checkout
+                  {!loading ? ("Checkout") : <div class="lds-ring-checkout"><div></div><div></div><div></div><div></div></div>
+}
                   </Button>
                 </div>
               </div>

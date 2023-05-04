@@ -3,7 +3,6 @@ import { Form, Button, Alert, Card } from "react-bootstrap";
 
 import { useMutation } from "@apollo/client";
 import { useQuery } from "@apollo/client";
-import spinner from "../assets/spinner.gif";
 
 // import Auth from "../../utils/auth";
 
@@ -110,7 +109,7 @@ export default function ProfileEdit() {
     <>
       {loading ? (
         <div className="d-flex justify-content-center align-items-center mt-5">
-          <img src={spinner} alt="loading" />
+          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>
       ) : (
         <div className="col-md-12">
