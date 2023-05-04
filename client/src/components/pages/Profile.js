@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import "../assets/Profile.css"
@@ -15,7 +15,7 @@ export default function Profile() {
     <>
       {loading ? (
         <div className="d-flex justify-content-center align-items-center mt-5">
-          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+          <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>
       ) : (
         <div className="">

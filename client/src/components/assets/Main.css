@@ -104,7 +104,7 @@ a:focus,
 }
 
 .btn-success:disabled {
-  background-color: var(--4th-color);
+  opacity: 40%;
 }
 
 

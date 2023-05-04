@@ -16,7 +16,7 @@ export default function Product(props) {
     <div>
       {loading ? (
         <div className="d-flex justify-content-center align-items-center mt-5">
-          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+          <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>
       ) : (
         <div className="container">
