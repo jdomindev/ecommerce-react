@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_PRODUCTS } from "../../utils/queries";
 
-import spinner from "../assets/spinner.gif";
 import "../assets/Product.css";
 
 export default function ProductDetail(props) {
@@ -25,7 +24,7 @@ export default function ProductDetail(props) {
     <>
       {loading ? (
         <div className="d-flex justify-content-center align-items-center mt-5">
-          <img src={spinner} alt="loading" />
+          <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>
       ) : null}
       {currentProduct ? (

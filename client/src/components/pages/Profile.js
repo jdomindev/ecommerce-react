@@ -1,7 +1,6 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import spinner from "../assets/spinner.gif";
 import "../assets/Profile.css"
 
 import { GET_ME } from "../../utils/queries";
@@ -16,7 +15,7 @@ export default function Profile() {
     <>
       {loading ? (
         <div className="d-flex justify-content-center align-items-center mt-5">
-          <img src={spinner} alt="loading" />
+          <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>
       ) : (
         <div className="">

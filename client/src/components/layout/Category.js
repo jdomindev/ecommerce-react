@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_CATEGORIES } from "../../utils/queries";
-// import spinner from "../assets/spinner.gif";
 
 import "../assets/Main.css";
 import "../assets/Home.css";
