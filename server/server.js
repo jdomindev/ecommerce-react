@@ -24,7 +24,8 @@ server.applyMiddleware({ app });
 var whitelist = [
   "https://ecommerce-react-backend.onrender.com",
   "https://ecommerce-react-backend.onrender.com/graphql",
-  "https://d2dre0lzik6pal.cloudfront.net"
+  "https://d2dre0lzik6pal.cloudfront.net",
+  "https://checkout.stripe.com"
 ];
 
 var corsOptions = {
