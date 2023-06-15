@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { useQuery } from "@apollo/client";
 
 import "../assets/Main.css";
@@ -16,7 +15,7 @@ export default function Home(props) {
 
   const products = data?.products || [];
 
-  const [filteredData, setFilteredData] = useState([]);
+  // const [filteredData, setFilteredData] = useState([]);
 
   return (
     <>

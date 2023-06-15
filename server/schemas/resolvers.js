@@ -58,7 +58,8 @@ const resolvers = {
     },
 
     checkout: async (parent, args, context) => {
-      const url = new URL(context.headers.referer).origin;
+      // const url = new URL(context.headers.referer).origin;
+      const url = "https://d2dre0lzik6pal.cloudfront.net";
       const line_items = [];
       
       // If user logged in, add cart to user's orders
@@ -75,7 +76,8 @@ const resolvers = {
         const product = await stripe.products.create({
           name: products[i].name,
           description: products[i].description,
-          images: [`${url}/images/${products[i].image}`],
+          // images stored on s3 bucket redirected to cloudFront distribution
+          images: [url + products[i].image],
         });
 
         const price = await stripe.prices.create({
@@ -87,7 +89,7 @@ const resolvers = {
         line_items.push({
           price: price.id,
           quantity: 1,
-        });
+        }); 
       }
 
       const session = await stripe.checkout.sessions.create({
