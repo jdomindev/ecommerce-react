@@ -58,8 +58,8 @@ const resolvers = {
     },
 
     checkout: async (parent, args, context) => {
-      // const url = new URL(context.headers.referer).origin;
-      const url = "https://d2dre0lzik6pal.cloudfront.net";
+      const url = new URL(context.headers.referer).origin;
+      const imagesUrl = "https://d2dre0lzik6pal.cloudfront.net"; 
       const line_items = [];
       
       // If user logged in, add cart to user's orders
@@ -77,7 +77,7 @@ const resolvers = {
           name: products[i].name,
           description: products[i].description,
           // images stored on s3 bucket redirected to cloudFront distribution
-          images: [url + products[i].image],
+          images: [imagesUrl + products[i].image],
         });
 
         const price = await stripe.prices.create({
@@ -92,12 +92,13 @@ const resolvers = {
         }); 
       }
 
+      console.log(url)
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items,
         mode: "payment",
-        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${url}/`,
+        success_url: [url + "/success?session_id={CHECKOUT_SESSION_ID}"],
+        cancel_url: [url + "/cart"],
       });
 
       return { session: session.id };
