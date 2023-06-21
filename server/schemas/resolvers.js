@@ -58,8 +58,8 @@ const resolvers = {
     },
 
     checkout: async (parent, args, context) => {
-      // const url = new URL(context.headers.referer).origin;
-      const url = window.location.origin;
+      const url = new URL(context.headers.referer).origin;
+      // const url = window.location.origin;
       const imagesUrl = "https://d2dre0lzik6pal.cloudfront.net"; 
       const line_items = [];
       
@@ -98,7 +98,7 @@ const resolvers = {
         line_items,
         mode: "payment",
         success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${url}/`,
+        cancel_url: `${url}/cart`,
       });
 
       return { session: session.id };
