@@ -10,6 +10,8 @@ import Auth from '../../utils/auth';
 const Login = () => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login] = useMutation(LOGIN_USER);
+  const [loading, setLoading] = useState(false)
+
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -26,6 +28,9 @@ const Login = () => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    setLoading(true);
+
     try {
       const { data } = await login({
         variables: { ...formState },
@@ -85,7 +90,7 @@ const Login = () => {
                             className='btn-custom'
                             type='submit'
                             variant='success'>
-                            Submit
+                            {!loading ? ("Submit") : <div className="lds-ring-checkout"><div></div><div></div><div></div><div></div></div>}
                             </Button>
                         </div>
                         <p className="float-left m-0">
