@@ -16,6 +16,7 @@ const Signup = () => {
   const [validated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -24,6 +25,8 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    
+    setLoading(true)
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
@@ -122,7 +125,7 @@ const Signup = () => {
                       disabled={!(userFormData.firstName && userFormData.lastName && userFormData.email && userFormData.password)}
                       type='submit'
                       variant='success'>
-                      Submit
+                      {!loading ? ("Submit") : <div className="lds-ring-checkout"><div></div><div></div><div></div><div></div></div>}
                       </Button>
                       
                   </div>

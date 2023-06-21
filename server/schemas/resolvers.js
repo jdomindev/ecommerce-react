@@ -1,7 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Address, Product, Order, Category } = require("../models");
 const { signToken } = require("../utils/auth");
-const stripe = require("stripe")(`${process.env.STRIPE_PRIVATE_KEY}`);
+const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
 const resolvers = {
   Query: {
@@ -59,7 +59,6 @@ const resolvers = {
 
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
-      // const url = window.location.origin;
       const imagesUrl = "https://d2dre0lzik6pal.cloudfront.net"; 
       const line_items = [];
       
